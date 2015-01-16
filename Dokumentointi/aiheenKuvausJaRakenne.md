@@ -2,7 +2,7 @@
 
 **Työn nimi:** Solitaire
 
-**Aihe:** Perus pasianssipeli eli klondike. Pelaajan tulee tyhjentää pelilauta korttimaittain ja numerojärjestyksessä oleviin pinoihin siirtelemällä niitä pelin sääntöjen mukaisesti.
+**Aihe:** Perus pasianssipeli eli klondike. Pelaajan tulee tyhjentää pelilauta lopetuspinoihin korttimaittain ja numerojärjestyksessä siirtelemällä niitä pelin sääntöjen mukaisesti.
 
 **Pelaajan toiminnot:**
 
@@ -12,10 +12,10 @@ Aloitusvalikko:
 * Sovelluksen sulkeminen
 
 Pelissä
-* Pelin pysäyttäminen - Pelin voi pistää "pauselle" ja josta sitä voi myös jatkaa
-* Pelin lopettaminen - Pelin keskeytys
+* Pelin pysäyttäminen - Pelin voi pistää "pauselle" tai pelin voi laittaa taas jatkumaan
+* Pelin lopettaminen - Pelin keskeytys, paluu aloitusvalikkoon
 * Vihjeen pyytäminen tietokoneelta - Peli kertoo jos pelilaudalla on mahdollisia siirtoja
-* Ennätyspisteiden tallentaminen - Pelin päätteeksi
+* Ennätyspisteiden tallentaminen - Pelin lopuksi
 
 
 ##Pelin säännöt
