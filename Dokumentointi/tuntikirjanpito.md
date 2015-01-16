@@ -1,10 +1,10 @@
-##Tuntikirjanpito
+﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
 
 **16.1.2015**
 
-Työmäärä: 2h
+Työmäärä: ~4h
 
-Kohde: Aiheen valinta, Netbeansin asetukset, Gitin asetukset, dokumentoinnin aloittaminen
+Kohde: Aiheen valinta, Netbeansin asetukset, Gitin asetukset, dokumentoinnin aloittaminen. Aihemäärittely, pelin säännöt ja tuntikirjanpito.
 
