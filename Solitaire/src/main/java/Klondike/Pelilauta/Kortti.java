@@ -2,7 +2,7 @@
  Tästä luokasta generoidaan pelissä käytettävät kortit. Kortin arvo voi olla välillä 1-13 ja maa
  hertta, pata, ruutu tai risti.
  */
-package Klondike;
+package Klondike.Pelilauta;
 
 public class Kortti {
 
@@ -28,6 +28,11 @@ public class Kortti {
 
     public void setArvo(int arvo) {
         this.arvo = arvo;
+    }
+
+    @Override
+    public String toString() {
+        return getMaa() + " " + getArvo();
     }
 
 }

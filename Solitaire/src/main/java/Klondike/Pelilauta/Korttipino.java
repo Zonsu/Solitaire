@@ -2,37 +2,26 @@
  Tästä luokasta luodaan ilmentymät kaikille pelin käyttämille pinoille. Piilossa olevalle pinolla ja jo käännetyille korteille
  luodaan omat pinot.
  */
-package Klondike;
+package Klondike.Pelilauta;
 
 import java.util.*;
 
 public class Korttipino {
 
-    private int pino;            //Luku kertoo pinon paikan: 0 korttipakka, 1-7 pelipinot ja 8-12 maalipinot.
-    private boolean kaannetty;   //Kertoo onko kyseessä käännettyjen korttien pino vai ei.
+    private int pino;                       //Luku kertoo pinon paikan: 0 korttipakka, 1-7 pelipinot ja 8-11 maalipinot. Käytetään tunnisteena.
     private ArrayList<Kortti> kortit;
 
-    
-    public Korttipino(int pino, boolean kaannetty) {
+    public Korttipino(int pino) {
         this.pino = pino;
-        this.kaannetty = kaannetty;
         this.kortit = new ArrayList();
     }
-    
+
     public int getPino() {
         return pino;
     }
 
     public void setPino(int pino) {
         this.pino = pino;
-    }
-
-    public boolean isKaannetty() {
-        return kaannetty;
-    }
-
-    public void setKaannetty(boolean kaannetty) {
-        this.kaannetty = kaannetty;
     }
 
     public ArrayList getKortit() {
@@ -54,7 +43,13 @@ public class Korttipino {
     public void poistaEnsimmainen() {
         kortit.remove(0);
     }
+
     public Kortti naytaPaalimmainen() {
-        return kortit.get(kortit.size()-1);
+        return kortit.get(kortit.size() - 1);
     }
+
+    public int pinonKoko() {
+        return kortit.size();
+    }
+
 }
