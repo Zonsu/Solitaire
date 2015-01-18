@@ -13,7 +13,7 @@ public class Peli {
 
     public static void main(String[] args) {
 
-    KorttienJako.uusiJako();                                                              // Jaetaan saatu korttipakka pelilaudalle.
+    KorttienJako.uudetKortit();                                                              // Luodaan uusi pakka kortteja, sekoitetaan ja jaetaan ne pelilaudalle.
 
         //Seuraavaksi testejä.
         Korttipino testiPino1;

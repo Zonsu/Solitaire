@@ -10,7 +10,7 @@ public class Kortti {
     private int arvo;
 
     public Kortti(int arvo) {
-        this.maa = "tyhjä";
+        this.maa = "";
         this.arvo = arvo;
     }
 

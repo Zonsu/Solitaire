@@ -10,18 +10,21 @@ public class KorttienJako {
 
     public static ArrayList<Kortti> korttiPakka;
 
-    public static void uusiJako() {
+    public static void uudetKortit() {                                              // Täysin uusi peli eli luodaan myös kortit.
         luoPakka();
-        sekoitaPakka();
+        uusiJako();
+    }
 
+    public static void uusiJako() {
+        sekoitaPakka();
         jaaUudestaan();
     }
 
     public static void jaaUudestaan() {
 
-        pinotNurin = new Korttipino[8];                                             // Seitsemän pelipinoa ja pakka.
+        pinotNurin = new Korttipino[8];                                             // Seitsemän pelipinoa ja pakka. Pinot erikseen korteille kuvapuoli alas- ja ylöspäin.
         pinotOikein = new Korttipino[8];
-        maaliPinot = new Korttipino[4];                                             // Maalipinot erikseen selkeyden vuoksi.
+        maaliPinot = new Korttipino[4];                                             // Maalipinot erikseen.
 
         jaaKortit();
         alustaMaalipinot();
@@ -60,19 +63,19 @@ public class KorttienJako {
 
     public static void jaaKortit() {
 
-        int pinoLaskuri = 1;                                                        
+        int pinoLaskuri = 1;
 
-        for (int i = 1; i < 8; i++) {                                               // Jaetaan kortit ensin seitsemään pelipinoon. Jokaisen pinon
-            Korttipino kortitNurin = new Korttipino(i);                             //  päällä on yksi kortti kuvapuoli ylöspäin.    
+        for (int i = 1; i < 8; i++) {                                               // Jaetaan kortit ensin seitsemään pelipinoon. Jokaisen pinon päällä yksi kortti kuvapuoli ylöspäin.
+            Korttipino kortitNurin = new Korttipino(i);
             Korttipino kortitOikein = new Korttipino(i);
 
             for (int k = 1; k < i; k++) {
                 kortitNurin.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));   // Ekassa pinossa ei yhtään nurinpäin olevaa korttia, vikassa kuusi.
                 pinoLaskuri++;
             }
-            
-            kortitOikein.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));
-            
+
+            kortitOikein.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));      // Jaetaan kortti kuvapuoli ylöspäin.
+
             pinoLaskuri++;
             pinotNurin[i] = kortitNurin;
             pinotOikein[i] = kortitOikein;
