@@ -54,10 +54,10 @@ public class Peli {
             Korttipino kortitNurin = new Korttipino(i, false);
             Korttipino kortitOikein = new Korttipino(i, true);
 
-            for (int k = 0; k < i; k++) {
+            for (int k = 1; k < i; k++) {
                 kortitNurin.lisaaKortti(korttiPakka.get(korttiPakka.size() - 1));
             }
-            for (int k = 0; k < i + 1; k++) {
+            for (int k = 1; k < i + 1; k++) {
                 kortitOikein.lisaaKortti(korttiPakka.get(korttiPakka.size() - 1));
             }
         }
