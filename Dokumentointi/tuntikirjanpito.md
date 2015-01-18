@@ -1,6 +1,12 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
+**18.1.2015**
+
+Työmäärä: ~4h
+
+Kohde: Koodin aloitus. Pelilaudan generointiin liittyvä logiikka. Paljon pohdintaa sopivasti toteutustyylistä. Pari ensimmäistä testiä.
+
 
 **16.1.2015**
 
