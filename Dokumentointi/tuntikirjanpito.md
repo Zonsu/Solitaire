@@ -3,7 +3,7 @@
 
 **18.1.2015**
 
-Työmäärä: ~4h
+Työmäärä: ~5h
 
 Kohde: Koodin aloitus. Pelilaudan generointiin liittyvä logiikka. Paljon pohdintaa sopivasti toteutustyylistä. Pari ensimmäistä testiä.
 
