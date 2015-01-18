@@ -9,8 +9,8 @@ public class Kortti {
     private String maa;
     private int arvo;
 
-    public Kortti(String maa, int arvo) {
-        this.maa = maa;
+    public Kortti(int arvo) {
+        this.maa = "tyhjä";
         this.arvo = arvo;
     }
 
