@@ -40,10 +40,6 @@ public class Korttipino {
         kortit.remove(kortit.size() - 1);
     }
 
-    public void poistaEnsimmainen() {
-        kortit.remove(0);
-    }
-
     public Kortti naytaPaalimmainen() {
         return kortit.get(kortit.size() - 1);
     }

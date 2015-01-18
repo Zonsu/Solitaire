@@ -13,9 +13,22 @@ public class Peli {
 
     public static void main(String[] args) {
 
-    KorttienJako.uudetKortit();                                                              // Luodaan uusi pakka kortteja, sekoitetaan ja jaetaan ne pelilaudalle.
+        KorttienJako.uudetKortit();                                            // Luodaan uusi pakka kortteja, sekoitetaan ja jaetaan ne pelilaudalle.
 
-        //Seuraavaksi testejä.
+        //Seuraavat testejä.
+        testiTulostus();
+        
+        KorttienJako.jaaUudestaan();
+        
+        testiTulostus();
+        
+        KorttienJako.uusiJako();
+        
+        testiTulostus();
+        
+    }
+
+    public static void testiTulostus() {
         Korttipino testiPino1;
         Korttipino testiPino2;
 
@@ -28,8 +41,6 @@ public class Peli {
             System.out.println("Oikeinpinossa nro. " + i + ". on " + testiPino2.pinonKoko() + " korttia. " + testiPino2.getKortit());
             System.out.println("");
         }
-
     }
-
 
 }
