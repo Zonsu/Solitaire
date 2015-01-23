@@ -16,11 +16,17 @@ public class KorttiTest {
     @Before
     public void setUp() {
         kortti = new Kortti(7);
+        kortti.setMaa("Hertta");
     }
 
      @Test
      public void konstruktoriAsettaaArvonOikein() {
          assertEquals(7, kortti.getArvo());
+     }
+     
+     @Test
+     public void maanAettaminenToimii() {
+        assertEquals("Hertta", kortti.getMaa());
      }
 
 }

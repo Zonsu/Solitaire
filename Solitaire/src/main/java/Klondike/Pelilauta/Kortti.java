@@ -4,6 +4,8 @@
  */
 package Klondike.Pelilauta;
 
+import java.util.Objects;
+
 public class Kortti {
 
     private String maa;
@@ -31,8 +33,29 @@ public class Kortti {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Kortti other = (Kortti) obj;
+        if (!Objects.equals(this.maa, other.maa)) {
+            return false;
+        }
+        if (this.arvo != other.arvo) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
+    @Override
     public String toString() {
         return getMaa() + " " + getArvo();
     }
+    
 
 }

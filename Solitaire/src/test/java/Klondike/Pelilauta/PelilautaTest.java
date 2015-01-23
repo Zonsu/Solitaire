@@ -52,13 +52,13 @@ public class PelilautaTest {
         assertEquals(4, pino.pinonKoko());
     }
     
-//    @Test
-//    public void nayttaakoPaalimmaisenOikein() {
-//        kortti = new Kortti(4);
-//        kortti.setMaa("Ruutu");
-//        
-//        assertEquals(pino.naytaPaalimmainen(), kortti);
-//    }
+    @Test
+    public void nayttaakoPaalimmaisenOikein() {
+        kortti = new Kortti(4);
+        kortti.setMaa("Ruutu");
+        
+        assertEquals(pino.naytaPaalimmainen(), kortti);
+    }
     
 //    @Test
 //    public void poistaakoViimeisenKortinPinosta() {
