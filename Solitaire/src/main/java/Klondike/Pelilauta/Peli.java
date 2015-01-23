@@ -15,16 +15,17 @@ public class Peli {
 
         KorttienJako.uudetKortit();                                            // Luodaan uusi pakka kortteja, sekoitetaan ja jaetaan ne pelilaudalle.
 
-        //Seuraavat testejä.
-        testiTulostus();
+//        //Seuraavat testejä.
         
-        KorttienJako.jaaUudestaan();
-        
-        testiTulostus();
-        
-        KorttienJako.uusiJako();
-        
-        testiTulostus();
+//        testiTulostus();
+//        
+//        KorttienJako.jaaUudestaan();
+//        
+//        testiTulostus();
+//        
+//        KorttienJako.uusiJako();
+//        
+//        testiTulostus();
         
     }
 

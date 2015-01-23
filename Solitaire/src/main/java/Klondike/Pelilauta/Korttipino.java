@@ -48,4 +48,22 @@ public class Korttipino {
         return kortit.size();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Korttipino other = (Korttipino) obj;
+        if (this.pino != other.pino) {
+            return false;
+        }
+        if (!Objects.equals(this.kortit, other.kortit)) {
+            return false;
+        }
+        return true;
+    }
+
 }

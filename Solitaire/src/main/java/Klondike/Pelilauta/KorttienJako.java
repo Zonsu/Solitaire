@@ -11,12 +11,12 @@ public class KorttienJako {
     public static ArrayList<Kortti> korttiPakka;
 
     public static void uudetKortit() {                                              // Täysin uusi peli eli luodaan myös kortit.
-        luoPakka();
+        korttiPakka = luoPakka();
         uusiJako();
     }
 
     public static void uusiJako() {
-        sekoitaPakka();
+        korttiPakka = sekoitaPakka(korttiPakka);
         jaaUudestaan();
     }
 
@@ -31,9 +31,9 @@ public class KorttienJako {
         laitaPakkaan();
     }
 
-    public static void luoPakka() {
+    public static ArrayList luoPakka() {
 
-        korttiPakka = new ArrayList();
+        ArrayList<Kortti> pakka = new ArrayList();
 
         for (int i = 0; i < 4; i++) {                                               // 4 maata ja 13 eri korttia. Selkeyden vuoksi korttien
             for (int j = 1; j < 14; j++) {                                          // maat Stringeinä.
@@ -52,16 +52,30 @@ public class KorttienJako {
                 if (i == 3) {
                     kortti.setMaa("Ruutu");
                 }
-                korttiPakka.add(kortti);
+                pakka.add(kortti);
             }
         }
+        return pakka;
     }
 
-    public static void sekoitaPakka() {
-        Collections.shuffle(korttiPakka);
+    public static int pakanKoko(ArrayList<Kortti> pakka) {                        // Testejä varten
+        int laskuri = 0;
+
+        for (Kortti kortti : pakka) {
+            laskuri++;
+        }
+
+        return laskuri;
+    }
+
+    public static ArrayList<Kortti> sekoitaPakka(ArrayList pakka) {
+        Collections.shuffle(pakka);
+        return pakka;
     }
 
     public static void jaaKortit() {
+        pinotNurin = new Korttipino[8];
+        pinotOikein = new Korttipino[8];
 
         int pinoLaskuri = 1;
 
@@ -80,7 +94,17 @@ public class KorttienJako {
             pinotNurin[i] = kortitNurin;
             pinotOikein[i] = kortitOikein;
         }
+    }
 
+    public static Korttipino palautaPino(int kumpi, int paikka) {
+        if (kumpi == 0) {
+            return pinotNurin[paikka];
+        } else if(kumpi == 1) {
+            return pinotOikein[paikka];
+        } else if(kumpi == 2) {
+            return maaliPinot[paikka];
+        }
+        return null;     
     }
 
     public static void alustaMaalipinot() {                                         // Alustetaan maalipinot.
