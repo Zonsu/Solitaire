@@ -99,12 +99,12 @@ public class KorttienJako {
     public static Korttipino palautaPino(int kumpi, int paikka) {
         if (kumpi == 0) {
             return pinotNurin[paikka];
-        } else if(kumpi == 1) {
+        } else if (kumpi == 1) {
             return pinotOikein[paikka];
-        } else if(kumpi == 2) {
+        } else if (kumpi == 2) {
             return maaliPinot[paikka];
         }
-        return null;     
+        return null;
     }
 
     public static void alustaMaalipinot() {                                         // Alustetaan maalipinot.
