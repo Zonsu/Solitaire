@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  *
  * @author Johanna
  */
-public class PelilautaTest {
+public class KorttipinoTest {
 
     Korttipino pino;
     Kortti kortti;
@@ -46,39 +46,49 @@ public class PelilautaTest {
     public void konstruktoriAsettaaPinonPaikanOikein() {
         assertEquals(5, pino.getPino());
     }
-    
+
     @Test
     public void onkoPinonKokoOikein() {
         assertEquals(4, pino.pinonKoko());
     }
-    
+
     @Test
     public void nayttaakoPaalimmaisenOikein() {
         kortti = new Kortti(4);
         kortti.setMaa("Ruutu");
-        
+
         assertEquals(pino.naytaPaalimmainen(), kortti);
     }
-    
-//    @Test
-//    public void poistaakoViimeisenKortinPinosta() {
-//        Korttipino testiPino = new Korttipino(5);
-//        
-//        kortti = new Kortti(1);
-//        kortti.setMaa("Pata");
-//        testiPino.lisaaKortti(kortti);
-//
-//        kortti = new Kortti(2);
-//        kortti.setMaa("Hertta");
-//        testiPino.lisaaKortti(kortti);
-//
-//        kortti = new Kortti(3);
-//        kortti.setMaa("Risti");
-//        testiPino.lisaaKortti(kortti);
-//        
-//        pino.poistaViimeinen();
-//        
-//        assertEquals(testiPino.getKortit(), pino.getKortit());
-//    }
+
+    @Test
+    public void poistaakoViimeisenKortinPinosta() {
+        Korttipino testiPino = new Korttipino(5);
+
+        kortti = new Kortti(1);
+        kortti.setMaa("Pata");
+        testiPino.lisaaKortti(kortti);
+
+        kortti = new Kortti(2);
+        kortti.setMaa("Hertta");
+        testiPino.lisaaKortti(kortti);
+
+        kortti = new Kortti(3);
+        kortti.setMaa("Risti");
+        testiPino.lisaaKortti(kortti);
+
+        pino.poistaViimeinen();
+
+        assertEquals(testiPino.getKortit(), pino.getKortit());
+    }
+
+    @Test
+    public void lisaakoKortinOikein() {
+        kortti = new Kortti(13);
+        kortti.setMaa("Pata");
+        pino.lisaaKortti(kortti);
+        
+        assertEquals(kortti, pino.naytaPaalimmainen());
+
+    }
 
 }

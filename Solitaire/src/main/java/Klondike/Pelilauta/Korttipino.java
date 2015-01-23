@@ -32,9 +32,9 @@ public class Korttipino {
         kortit.add(kortti);
     }
 
-    public void poistaKortti(Kortti kortti) {
-        kortit.remove(kortti);
-    }
+//    public void poistaKortti(Kortti kortti) {
+//        kortit.remove(kortti);
+//    }
 
     public void poistaViimeinen() {
         kortit.remove(kortit.size() - 1);
