@@ -1,6 +1,12 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
+**23.1.2015**
+
+Työmäärä: ~4h
+
+Kohde: Korjauksia koodin ja testejä. Luokkakaavio ja pitin säätö.
+
 **18.1.2015**
 
 Työmäärä: ~5h
