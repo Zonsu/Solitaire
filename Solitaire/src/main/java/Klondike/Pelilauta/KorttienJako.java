@@ -6,37 +6,58 @@ import static Klondike.Pelilauta.Peli.pinotOikein;
 
 import java.util.*;
 
+/**
+ * Luokassa korttien pelipöytään jakoon liittyvä logiikka.
+ *
+ * @author Zonsu
+ */
 public class KorttienJako {
 
-    public static ArrayList<Kortti> korttiPakka;
+    private static ArrayList<Kortti> korttiPakka;
 
-    public static void uudetKortit() {                                              // Täysin uusi peli eli luodaan myös kortit.
+    /**
+     * Täysin uusi peli eli luodaan myös kortit.
+     */
+    public static void uudetKortit() {
         korttiPakka = luoPakka();
         uusiJako();
     }
 
+    /**
+     * Jos halutaan sekoittaa pakka ja jakaa uudestaan.
+     */
     public static void uusiJako() {
         korttiPakka = sekoitaPakka(korttiPakka);
         jaaUudestaan();
     }
 
+    /**
+     * Uudelleenjako jo sekoitetuilla korteilla.
+     */
     public static void jaaUudestaan() {
 
-        pinotNurin = new Korttipino[8];                                             // Seitsemän pelipinoa ja pakka. Pinot erikseen korteille kuvapuoli alas- ja ylöspäin.
-        pinotOikein = new Korttipino[8];
-        maaliPinot = new Korttipino[4];                                             // Maalipinot erikseen.
+        // Seitsemän pelipinoa ja pakka. Pinot erikseen korteille kuvapuoli alas- ja ylöspäin.
+        pinotNurin = new Korttipino[8];
+        pinotOikein = new Korttipino[13];
+        // Maalipinot erikseen.
+        maaliPinot = new Korttipino[4];
 
         jaaKortit();
         alustaMaalipinot();
         laitaPakkaan();
     }
 
+    /**
+     * Luodaan 52 korttia, 4 maata joissa jokaisessa 13 korttia.
+     *
+     * @return luotu pakka
+     */
     public static ArrayList luoPakka() {
 
         ArrayList<Kortti> pakka = new ArrayList();
 
-        for (int i = 0; i < 4; i++) {                                               // 4 maata ja 13 eri korttia. Selkeyden vuoksi korttien
-            for (int j = 1; j < 14; j++) {                                          // maat Stringeinä.
+        for (int i = 0; i < 4; i++) {
+            for (int j = 1; j < 14; j++) {
 
                 Kortti kortti = new Kortti(j);
 
@@ -58,7 +79,13 @@ public class KorttienJako {
         return pakka;
     }
 
-    public static int pakanKoko(ArrayList<Kortti> pakka) {                        // Testejä varten
+    /**
+     * Lasketaan pakan korttien lukumäärä
+     *
+     * @param pakka
+     * @return korttien määrä
+     */
+    public static int pakanKoko(ArrayList<Kortti> pakka) {
         int laskuri = 0;
 
         for (Kortti kortti : pakka) {
@@ -68,27 +95,38 @@ public class KorttienJako {
         return laskuri;
     }
 
+    /**
+     * Pakan sekoitus
+     *
+     * @param pakka
+     * @return sekoitettu pakka
+     */
     public static ArrayList<Kortti> sekoitaPakka(ArrayList pakka) {
         Collections.shuffle(pakka);
         return pakka;
     }
 
+    /**
+     * Jakaa kortit seitsemään pelipinoon ja jokaisen pinon päälle kortin
+     * kuvapuoli ylöspäin.
+     */
     public static void jaaKortit() {
         pinotNurin = new Korttipino[8];
         pinotOikein = new Korttipino[8];
 
         int pinoLaskuri = 1;
 
-        for (int i = 1; i < 8; i++) {                                               // Jaetaan kortit ensin seitsemään pelipinoon. Jokaisen pinon päällä yksi kortti kuvapuoli ylöspäin.
+        for (int i = 1; i < 8; i++) {
             Korttipino kortitNurin = new Korttipino(i);
             Korttipino kortitOikein = new Korttipino(i);
 
+            // Ekassa pinossa ei yhtään nurinpäin olevaa korttia, vikassa kuusi.
             for (int k = 1; k < i; k++) {
-                kortitNurin.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));   // Ekassa pinossa ei yhtään nurinpäin olevaa korttia, vikassa kuusi.
+                kortitNurin.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));
                 pinoLaskuri++;
             }
-
-            kortitOikein.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));      // Jaetaan kortti kuvapuoli ylöspäin.
+            // Jaetaan kortti kuvapuoli ylöspäin.
+            kortitOikein.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));
 
             pinoLaskuri++;
             pinotNurin[i] = kortitNurin;
@@ -96,18 +134,28 @@ public class KorttienJako {
         }
     }
 
-    public static Korttipino palautaPino(int kumpi, int paikka) {
-        if (kumpi == 0) {
+    /**
+     * Tarkistetaan pino halutusta paikasta
+     *
+     * @param koodi sille millainen pino
+     * @param pinon paikka pinojenv taulussa
+     * @return palauttaa halutun pinon
+     */
+    public static Korttipino palautaPino(int mika, int paikka) {
+        if (mika == 0) {
             return pinotNurin[paikka];
-        } else if (kumpi == 1) {
+        } else if (mika == 1) {
             return pinotOikein[paikka];
-        } else if (kumpi == 2) {
+        } else if (mika == 2) {
             return maaliPinot[paikka];
         }
         return null;
     }
 
-    public static void alustaMaalipinot() {                                         // Alustetaan maalipinot.
+    /**
+     * Alustetaan neljä tyhjää maalipinoa.
+     */
+    public static void alustaMaalipinot() {
 
         for (int i = 0; i < 4; i++) {
             Korttipino maali = new Korttipino(i);
@@ -115,7 +163,10 @@ public class KorttienJako {
         }
     }
 
-    public static void laitaPakkaan() {                                             // Jäljelle jääneet kortit laitetaan pakkaan (24 korttia).
+    /**
+     * Laitetaan loput kortit pakkaan.
+     */
+    public static void laitaPakkaan() {
 
         Korttipino pakka = new Korttipino(0);
         Korttipino pakastaKaannetyt = new Korttipino(0);

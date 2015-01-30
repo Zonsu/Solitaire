@@ -1,14 +1,18 @@
-/*
- Tästä luokasta generoidaan pelissä käytettävät kortit. Kortin arvo voi olla välillä 1-13 ja maa
- hertta, pata, ruutu tai risti.
- */
 package Klondike.Pelilauta;
 
 import java.util.Objects;
 
+/**
+ * Tästä luokasta generoidaan pelissä käytettävät kortit. Kortin arvo voi olla
+ * välillä 1-13 ja maa hertta, pata, ruutu tai risti. Sen väri on musta tai
+ * punainen.
+ *
+ * @author Zonsu
+ */
 public class Kortti {
 
     private String maa;
+    private String vari;
     private int arvo;
 
     public Kortti(int arvo) {
@@ -21,11 +25,23 @@ public class Kortti {
     }
 
     public void setMaa(String maa) {
+
         this.maa = maa;
+
+        if (this.maa == "Hertta" | this.maa == "Ruutu") {
+            this.vari = "punainen";
+        } else {
+            this.vari = "musta";
+        }
+
     }
 
     public int getArvo() {
         return arvo;
+    }
+
+    public String getVari() {
+        return vari;
     }
 
     public void setArvo(int arvo) {
@@ -50,12 +66,9 @@ public class Kortti {
         return true;
     }
 
-    
-    
     @Override
     public String toString() {
         return getMaa() + " " + getArvo();
     }
-    
 
 }

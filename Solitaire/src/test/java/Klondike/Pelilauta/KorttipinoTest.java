@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Klondike.Pelilauta;
 
 import org.junit.After;
@@ -12,10 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Johanna
- */
+
 public class KorttipinoTest {
 
     Korttipino pino;
@@ -76,7 +69,7 @@ public class KorttipinoTest {
         kortti.setMaa("Risti");
         testiPino.lisaaKortti(kortti);
 
-        pino.poistaViimeinen();
+        pino.nostaPaalimmainen();
 
         assertEquals(testiPino.getKortit(), pino.getKortit());
     }

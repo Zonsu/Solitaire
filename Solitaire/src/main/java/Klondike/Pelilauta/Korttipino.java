@@ -1,14 +1,17 @@
-/*
- Tästä luokasta luodaan ilmentymät kaikille pelin käyttämille pinoille. Piilossa olevalle pinolla ja jo käännetyille korteille
- luodaan omat pinot.
- */
 package Klondike.Pelilauta;
 
 import java.util.*;
 
+/**
+ * Tästä luokasta luodaan ilmentymät kaikille pelin käyttämille pinoille.
+ * Piilossa olevalle pinolla ja jo käännetyille korteille luodaan omat pinot.
+ *
+ * @author Zonsu
+ */
 public class Korttipino {
 
-    private int pino;                       //Luku kertoo pinon paikan: 0 korttipakka, 1-7 pelipinot ja 8-11 maalipinot. Käytetään tunnisteena.
+    //Luku kertoo pinon paikan: 0 korttipakka, 1-7 pelipinot ja 8-11 maalipinot. Käytetään tunnisteena.
+    private int pino;
     private ArrayList<Kortti> kortit;
 
     public Korttipino(int pino) {
@@ -17,7 +20,7 @@ public class Korttipino {
     }
 
     public int getPino() {
-        return pino;
+        return this.pino;
     }
 
     public void setPino(int pino) {
@@ -25,27 +28,37 @@ public class Korttipino {
     }
 
     public ArrayList getKortit() {
-        return kortit;
+        return this.kortit;
     }
 
     public void lisaaKortti(Kortti kortti) {
-        kortit.add(kortti);
+        this.kortit.add(kortti);
     }
 
-//    public void poistaKortti(Kortti kortti) {
+//   public void poistaKortti(Kortti kortti) {
 //        kortit.remove(kortti);
 //    }
+    
+    /**
+     * Tyhjennyksessä jotain pielessä ja se tulee tutkia ja mahd. muuttaa.
+     */
+    public void tyhjennaPino() {
+        this.kortit.clear();
+    }
 
-    public void poistaViimeinen() {
-        kortit.remove(kortit.size() - 1);
+    /**
+     * Nosta poistaa ja näytä kurkkaa päälimmäisen.
+     */
+    public void nostaPaalimmainen() {
+        this.kortit.remove(kortit.size() - 1);
     }
 
     public Kortti naytaPaalimmainen() {
-        return kortit.get(kortit.size() - 1);
+        return this.kortit.get(kortit.size() - 1);
     }
 
     public int pinonKoko() {
-        return kortit.size();
+        return this.kortit.size();
     }
 
     @Override
