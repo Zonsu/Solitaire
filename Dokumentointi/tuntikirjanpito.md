@@ -1,6 +1,12 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
+**30.1.2015**
+
+Työmäärä: 5h
+
+Kohde: Pelilogiikan kirjoittamista korttien siirtämisen muodossa sekä testejä. Paljon muutoksia vanhoihin luokkiin mutta ei varsinaisiin toiminnallisuuksiin. Uusi luokkakaavio.
+
 **23.1.2015**
 
 Työmäärä: ~4h
