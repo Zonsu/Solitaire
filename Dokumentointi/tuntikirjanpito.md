@@ -1,6 +1,12 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
+**3.2.2015**
+
+Työmäärä: 2h
+
+Kohde: Koodikatselmointi: koodin arviointi ja palaute
+
 **30.1.2015**
 
 Työmäärä: 5h
