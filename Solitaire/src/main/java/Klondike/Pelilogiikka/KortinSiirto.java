@@ -2,9 +2,9 @@ package Klondike.Pelilogiikka;
 
 import Klondike.Pelilauta.Kortti;
 import Klondike.Pelilauta.Korttipino;
-import static Klondike.Pelilauta.Peli.maaliPinot;
-import static Klondike.Pelilauta.Peli.pinotNurin;
-import static Klondike.Pelilauta.Peli.pinotOikein;
+import static Klondike.Pelilauta.Pelilauta.maaliPinot;
+import static Klondike.Pelilauta.Pelilauta.pinotNurin;
+import static Klondike.Pelilauta.Pelilauta.pinotOikein;
 import java.util.*;
 
 /**

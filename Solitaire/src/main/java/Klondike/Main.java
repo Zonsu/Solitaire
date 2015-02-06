@@ -1,5 +1,8 @@
 package Klondike;
 
+import Klondike.GraafinenUi.Kayttoliittyma;
+import javax.swing.*;
+
 /**
  * Vielä tyhjä main.
  *
@@ -8,5 +11,7 @@ package Klondike;
 public class Main {
 
     public static void main(String[] args) {
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+        SwingUtilities.invokeLater(kayttoliittyma);
     }
 }
