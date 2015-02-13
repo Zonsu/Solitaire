@@ -7,9 +7,9 @@ import java.util.logging.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
 /**
  * Piirretään kortit pelilaudalle.
+ *
  * @author Zonsu
  */
 public class PelilaudanPiirtaja {
@@ -21,11 +21,15 @@ public class PelilaudanPiirtaja {
     private ImageIcon tausta;
     private ImageIcon tyhja;
 
-    // Korttilaskuri tulee käyttöön kun sekoitetusta pakasta jaetaan kortteja.
+    /* Korttilaskuri tulee käyttöön kun sekoitetusta pakasta otetaan kortteja. Ei vielä implementoitu
+     */
     private int korttiLaskuri;
 
     void luoKomponentit(Container container) {
 
+        /* 
+         Tästä tulee todennäköisesti myöhemmin GridBgLayout kunhan jaksan selvittää.
+         */
         container.setLayout(new GridLayout(2, 7, 0, 0));
 
         try {
@@ -38,6 +42,11 @@ public class PelilaudanPiirtaja {
 
     }
 
+    /**
+     * Alustetaan pinoihin oikeat määrät kortteja pelin aloitusta varten.
+     *
+     * @param container
+     */
     public void alustaPakat(Container container) {
 
         korttiLaskuri = 0;
@@ -88,13 +97,14 @@ public class PelilaudanPiirtaja {
         }
 
         for (int i = 0; i < oikein; i++) {
-            paneeli.add(piirraOikein(paneeli, nurin + oikein -i));
+            paneeli.add(piirraOikein(paneeli, nurin + oikein - i));
         }
 
         for (int i = 0; i < nurin; i++) {
             paneeli.add(piirraNurin(paneeli, nurin - i));
         }
-        container.add(paneeli, BorderLayout.NORTH);
+       
+        container.add(paneeli);
     }
 
     /**
@@ -124,7 +134,14 @@ public class PelilaudanPiirtaja {
         return kuva;
     }
 
-    public JLabel piirraOikein(JPanel laatikko, int monesko) {
+    /**
+     * Metodi piirtää laudalle oikein päin olevan kortin.
+     *
+     * @param paneeli
+     * @param monesko
+     * @return
+     */
+    public JLabel piirraOikein(JPanel paneeli, int monesko) {
 
         BufferedImage kortti;
         JLabel kuva;
@@ -133,7 +150,7 @@ public class PelilaudanPiirtaja {
 
         /*
          Tässä välissä tulevaisuudessa kysytään KorttienJaolta mikä kortti jaetaan. 
-           Nyt placeholderina muita kortteja.
+         Nyt placeholderina muita kortteja.
          */
         if (korttiLaskuri > 12) {
             korttiLaskuri = 0;
@@ -141,7 +158,7 @@ public class PelilaudanPiirtaja {
         kortti = hertat[korttiLaskuri];
         korttiLaskuri++;
         kuva = new JLabel(new ImageIcon(kortti));
-        insets = laatikko.getInsets();
+        insets = paneeli.getInsets();
 
         size = kuva.getPreferredSize();
         kuva.setBounds(25 + insets.left, monesko * 20 + insets.top + insets.top,
@@ -150,7 +167,13 @@ public class PelilaudanPiirtaja {
         return kuva;
     }
 
-    public JLabel piirraTyhja(JPanel laatikko) {
+    /**
+     * Piirtää laudalle tyhjää paikkaa kuvaavan kuvan.
+     *
+     * @param paneeli
+     * @return
+     */
+    public JLabel piirraTyhja(JPanel paneeli) {
 
         ImageIcon kortti;
         JLabel kuva;
@@ -160,7 +183,7 @@ public class PelilaudanPiirtaja {
         kortti = tyhja;
         kuva = new JLabel(kortti);
 
-        insets = laatikko.getInsets();
+        insets = paneeli.getInsets();
         size = kuva.getPreferredSize();
         kuva.setBounds(20 + insets.left, 20 + insets.top,
                 size.width, size.height);
@@ -168,6 +191,12 @@ public class PelilaudanPiirtaja {
         return kuva;
     }
 
+    /**
+     * Haetaan annetusta spritestä kaikki 52 korttia ja taulukoidaan ne maiden
+     * mukaan. Haetaan myös kortin taustakuva ja tyhjää paikkaa kuvaava kuva.
+     *
+     * @throws IOException
+     */
     public void cardsFromSprite() throws IOException {
         BufferedImage sprite = ImageIO.read(new File("src/main/resources/Images/temp_cards_sprite.gif"));
 
