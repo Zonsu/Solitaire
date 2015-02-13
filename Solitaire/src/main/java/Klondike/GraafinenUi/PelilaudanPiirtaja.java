@@ -75,7 +75,7 @@ public class PelilaudanPiirtaja {
          */
 
         for (int i = 0; i < 7; i++) {
-            uusiPaneeli(i, 4, container);
+            uusiPaneeli(i, 1, container);
         }
     }
 
@@ -128,7 +128,7 @@ public class PelilaudanPiirtaja {
 
         insets = paneeli.getInsets();
         size = kuva.getPreferredSize();
-        kuva.setBounds(25 + insets.left, monesko * 20 + insets.top,
+        kuva.setBounds(20 + insets.left, monesko * 20 + insets.top,
                 size.width, size.height);
 
         return kuva;
@@ -161,7 +161,7 @@ public class PelilaudanPiirtaja {
         insets = paneeli.getInsets();
 
         size = kuva.getPreferredSize();
-        kuva.setBounds(25 + insets.left, monesko * 20 + insets.top + insets.top,
+        kuva.setBounds(20 + insets.left, monesko * 20 + insets.top + insets.top,
                 size.width, size.height);
 
         return kuva;
