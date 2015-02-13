@@ -1,7 +1,7 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
-**13.3.2015*'
+**13.3.2015**
 
 Työmäärä: 10h
 
