@@ -1,17 +1,27 @@
-
 package Klondike.GraafinenUi;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.ImageIcon.*;
+import Klondike.GraafinenUi.PelilaudanPiirtaja.*;
 
 /**
- * TODELLA KESKEN. 
- * 
+ * TODELLA KESKEN.
+ *
  * @author Zonsu
  */
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
+    private BufferedImage[] sprites;
+    private ImageIcon tausta;
+    private ImageIcon tyhja;
 
     public Kayttoliittyma() {
     }
@@ -20,56 +30,46 @@ public class Kayttoliittyma implements Runnable {
 
     public void run() {
         frame = new JFrame("Klondike Solitaire");
-        frame.setPreferredSize(new Dimension(800, 500));
-
+        frame.setPreferredSize(new Dimension(800, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        luoKomponentit(frame.getContentPane());
+        PelilaudanPiirtaja piirra = new PelilaudanPiirtaja();
+        piirra.luoKomponentit(frame.getContentPane());
 
         frame.pack();
         frame.setVisible(true);
     }
 
-    private void luoKomponentit(Container container) {
-        GridLayout layout = new GridLayout(2, 7);
-        container.setLayout(layout);
-
-        JTextArea textArea11 = new JTextArea("Eka rivi eka");
-        JTextArea textArea12 = new JTextArea("Eka rivi toka");
-        JTextArea textArea13 = new JTextArea("Eka rivi kolmas");
-        JTextArea textArea14 = new JTextArea("Eka rivi neljäs");
-        JTextArea textArea15 = new JTextArea("Eka rivi viides");
-        JTextArea textArea16 = new JTextArea("Eka rivi kuudes");
-        JTextArea textArea17 = new JTextArea("Eka rivi seitsemäs");
-
-        JTextArea textArea21 = new JTextArea("Toka rivi eka");
-        JTextArea textArea22 = new JTextArea("Toka rivi toka");
-        JTextArea textArea23 = new JTextArea("Toka rivi kolmas");
-        JTextArea textArea24 = new JTextArea("Toka rivi neljäs");
-        JTextArea textArea25 = new JTextArea("Toka rivi viides");
-        JTextArea textArea26 = new JTextArea("Toka rivi kuudes");
-        JTextArea textArea27 = new JTextArea("Toka rivi seitsemäs");
-
-        container.add(textArea11);
-        container.add(textArea12);
-        container.add(textArea13);
-        container.add(textArea14);
-        container.add(textArea15);
-        container.add(textArea16);
-        container.add(textArea17);
-
-        container.add(textArea21);
-        container.add(textArea22);
-        container.add(textArea23);
-        container.add(textArea24);
-        container.add(textArea25);
-        container.add(textArea26);
-        container.add(textArea27);
-
-    }
-
     public JFrame getFrame() {
         return frame;
+    }
+
+    public void cardsFromSprite() throws IOException {
+        BufferedImage bigImg = ImageIO.read(new File("src/main/resources/Images/temp_cards_sprite.gif"));
+
+        final int width = 72;
+        final int height = 100;
+        final int rows = 4;
+        final int cols = 13;
+
+        sprites = new BufferedImage[rows * cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                sprites[(i * cols) + j] = bigImg.getSubimage(
+                        j * width,
+                        i * height,
+                        width,
+                        height
+                );
+
+            }
+        }
+        BufferedImage img = bigImg.getSubimage(0, 400, width, height);
+        tausta = new ImageIcon(img);
+
+        img = bigImg.getSubimage(147, 400, width, height);
+        tyhja = new ImageIcon(img);
     }
 
 }
