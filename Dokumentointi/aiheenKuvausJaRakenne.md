@@ -17,17 +17,6 @@ Pelissä
 * Vihjeen pyytäminen tietokoneelta - Peli kertoo jos pelilaudalla on mahdollisia siirtoja
 * Ennätyspisteiden tallentaminen - Pelin lopuksi
 
-##Pelin rakenne
-
-**Klondike.GraafinenUI**
-	#Kayttoliittyma.java: Luokan metodia run() kutsumalla käynnistyy graafinen käyttöliittymä. Samalla kutsutaan piirtäjää.
-	PeliLaudanPiirtaja.java: Jakaa pelilaudan 2 x 7 lokeroihin joihin pakat piirretään. Luokka alustaa pakkoihin oikeat määrät kortteja piirrettäväksi ja piirtää ne pelilaudalle.
-	KentanKuuntelija.java: Kuuntelee käyttäkän klikkauksia ja välittää ne edelleen klikkauslaskurille.
-	
-**Klondike.Pelilauta**
-	
-
-
 
 ##Pelin säännöt
 
