@@ -74,7 +74,6 @@ public class KortinSiirto {
             for (int i = 0; i < kortit.size(); i++) {
                 pakka.lisaaKortti(kortit.get(kortit.size() - i - 1));
             }
-
         } else {
             siirrettava = pakka.naytaPaalimmainen();
             pakka.nostaPaalimmainen();
