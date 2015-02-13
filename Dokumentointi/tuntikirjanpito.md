@@ -1,6 +1,12 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
+**13.3.2015*'
+
+Työmäärä: 10h
+
+Kohde: Swingin kanssa kärvistely. Ohjelma piirtää kortit oikeille paikoille. Pari sekvenssikaaviota ja luokkakaavion päivitys. 
+
 **5-6.2.2015**
 
 Työmäärä: 4h
