@@ -1,6 +1,12 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
+**20.2.2015**
+
+Työmäärä: 6h
+
+Kohde: Ohjelman toimintakuntoon saattaminen ja siinä epäonnistuminen. Uusia testejä käyttöliittymälle ja sekvenssikaavioiden päivitys.
+
 **13.3.2015**
 
 Työmäärä: 10h

@@ -14,16 +14,17 @@ import javax.swing.*;
  */
 public class PelilaudanPiirtaja {
 
-    private BufferedImage[] padat;
-    private BufferedImage[] hertat;
-    private BufferedImage[] ristit;
-    private BufferedImage[] ruudut;
-    private ImageIcon tausta;
-    private ImageIcon tyhja;
+    public BufferedImage[] padat;
+    public BufferedImage[] hertat;
+    public BufferedImage[] ristit;
+    public BufferedImage[] ruudut;
+    public ImageIcon tausta;
+    public ImageIcon tyhja;
 
     /* Korttilaskuri tulee käyttöön kun sekoitetusta pakasta otetaan kortteja. Ei vielä implementoitu
      */
     private int korttiLaskuri;
+    
 
     void luoKomponentit(Container container) {
 
@@ -33,7 +34,7 @@ public class PelilaudanPiirtaja {
         container.setLayout(new GridLayout(2, 7, 0, 0));
 
         try {
-            cardsFromSprite();
+            tuoKuvatSpritesta();
         } catch (IOException ex) {
             Logger.getLogger(Kayttoliittyma.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -91,13 +92,20 @@ public class PelilaudanPiirtaja {
     public void uusiPaneeli(int nurin, int oikein, Container container) {
         JPanel paneeli = new JPanel();
         paneeli.setLayout(null);
+        int pinoLaskuri = 0;
 
         if (nurin == 0 && oikein == 0) {
             paneeli.add(piirraTyhja(paneeli));
         }
 
         for (int i = 0; i < oikein; i++) {
-            paneeli.add(piirraOikein(paneeli, nurin + oikein - i));
+            JLabel kortti;
+            
+            kortti = piirraOikein(paneeli, nurin + oikein - i);
+            paneeli.add(kortti);
+            PiirrettyKortti piirretyKortti = new PiirrettyKortti(kortti, pinoLaskuri);
+            
+            pinoLaskuri++;
         }
 
         for (int i = 0; i < nurin; i++) {
@@ -197,7 +205,7 @@ public class PelilaudanPiirtaja {
      *
      * @throws IOException
      */
-    public void cardsFromSprite() throws IOException {
+    public void tuoKuvatSpritesta() throws IOException {
         BufferedImage sprite = ImageIO.read(new File("src/main/resources/Images/temp_cards_sprite.gif"));
 
         final int width = 72;

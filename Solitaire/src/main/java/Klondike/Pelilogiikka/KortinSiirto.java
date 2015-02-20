@@ -57,6 +57,8 @@ public class KortinSiirto {
      * @param mihin pinoon
      */
     public static void siirraPino(int mista, int monesko, int mihin) {
+        
+        
 
     }
 

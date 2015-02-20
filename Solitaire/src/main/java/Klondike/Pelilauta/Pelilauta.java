@@ -18,4 +18,17 @@ public class Pelilauta {
         KorttienJako.uudetKortit();
     }
 
+    public static Korttipino[] getPinotNurin() {
+        return pinotNurin;
+    }
+
+    public static Korttipino[] getPinotOikein() {
+        return pinotOikein;
+    }
+
+    public static Korttipino[] getMaaliPinot() {
+        return maaliPinot;
+    }
+    
+
 }

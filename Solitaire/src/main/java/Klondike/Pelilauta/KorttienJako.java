@@ -44,7 +44,7 @@ public class KorttienJako {
 
         jaaKortit();
         alustaMaalipinot();
-        laitaPakkaan();
+        alustaPakka();
     }
 
     /**
@@ -166,7 +166,7 @@ public class KorttienJako {
     /**
      * Laitetaan loput kortit pakkaan.
      */
-    public static void laitaPakkaan() {
+    public static void alustaPakka() {
 
         Korttipino pakka = new Korttipino(0);
         Korttipino pakastaKaannetyt = new Korttipino(0);
