@@ -51,101 +51,97 @@ public class PelilaudanPiirtajaTest {
         frame.dispose();
     }
 
-    @Test
-    public void jakaaKorttienKuviaOikeanMaaranTaulukoihin() throws IOException {
-        piirra.tuoKuvatSpritesta();
-
-        int korttienMaara = piirra.hertat.length + piirra.padat.length + piirra.ristit.length + piirra.ruudut.length;
-
-        assertEquals(52, korttienMaara);
-    }
-
-    @Test
-    public void luoJaLisaaUudenPaneeliOlion() {
-        piirra.uusiPaneeli(0, 0, container);
-        assertEquals(1, container.getComponentCount());
-    }
-
-    public void luoJaLisaaUudenPaneeliOlion2() throws IOException {
-        piirra.tuoKuvatSpritesta();
-        piirra.uusiPaneeli(0, 2, container);
-        assertEquals(2, container.getComponentCount());
-    }
-
-    public void luoJaLisaaUudenPaneeliOlion3() {
-        piirra.uusiPaneeli(3, 0, container);
-        assertEquals(1, container.getComponentCount());
-    }
-
-    @Test
-    public void luoJaLisaaUudenTyhjanKortin() {
-        JPanel paneeli = new JPanel();
-        paneeli.setLayout(null);
-
-        paneeli.add(piirra.piirraTyhja(paneeli));
-
-        assertEquals(1, paneeli.getComponentCount());
-    }
-
-    @Test
-    public void luoJaLisaaUudenOikeinKortin() throws IOException {
-        JPanel paneeli = new JPanel();
-        paneeli.setLayout(null);
-        piirra.tuoKuvatSpritesta();
-
-        paneeli.add(piirra.piirraOikein(paneeli, 1));
-
-        assertEquals(1, paneeli.getComponentCount());
-    }
-
-    @Test
-    public void luoJaLisaaUudenNurinKortin() {
-        JPanel paneeli = new JPanel();
-        paneeli.setLayout(null);
-
-        paneeli.add(piirra.piirraNurin(paneeli, 1));
-
-        assertEquals(1, paneeli.getComponentCount());
-    }
-
-    @Test
-    public void piirtaaTyhjanKortinOikeallePaikalle() {
-        JPanel paneeli = new JPanel();
-        paneeli.setLayout(null);
-        JLabel kortti = piirra.piirraTyhja(paneeli);
-
-        Point piste = new Point();
-        piste.setLocation(20, 20);
-
-        assertEquals(piste, kortti.getLocation());
-
-    }
-
-    @Test
-    public void piirtaaKaannetynKortinOikeallePaikalle() throws IOException {
-        piirra.tuoKuvatSpritesta();
-
-        JPanel paneeli = new JPanel();
-        paneeli.setLayout(null);
-        JLabel kortti = piirra.piirraOikein(paneeli, 2);
-
-        Point piste = new Point();
-        piste.setLocation(20, 40);
-
-        assertEquals(piste, kortti.getLocation());
-
-    }
-
-    @Test
-    public void piirtaaNurinKortinOikeallePaikalle() {
-        JPanel paneeli = new JPanel();
-        paneeli.setLayout(null);
-        JLabel kortti = piirra.piirraNurin(paneeli, 4);
-
-        Point piste = new Point();
-        piste.setLocation(20, 80);
-
-        assertEquals(piste, kortti.getLocation());
-    }
-
+//    @Test
+//    public void jakaaKorttienKuviaOikeanMaaranTaulukoihin() throws IOException {
+//        piirra.tuoKuvatSpritesta();
+//
+//        int korttienMaara = piirra.hertat.length + piirra.padat.length + piirra.ristit.length + piirra.ruudut.length;
+//
+//        assertEquals(52, korttienMaara);
+//    }
+//    @Test
+//    public void luoJaLisaaUudenPaneeliOlion() {
+//        piirra.uusiPaneeli(0, 0, container);
+//        assertEquals(1, container.getComponentCount());
+//    }
+//    public void luoJaLisaaUudenPaneeliOlion2() throws IOException {
+//        piirra.tuoKuvatSpritesta();
+//        piirra.uusiPaneeli(0, 2, container);
+//        assertEquals(2, container.getComponentCount());
+//    }
+//    public void luoJaLisaaUudenPaneeliOlion3() {
+//        piirra.uusiPaneeli(3, 0, container);
+//        assertEquals(1, container.getComponentCount());
+//    }
+//
+//    @Test
+//    public void luoJaLisaaUudenTyhjanKortin() {
+//        JPanel paneeli = new JPanel();
+//        paneeli.setLayout(null);
+//
+//        paneeli.add(piirra.piirraTyhja(paneeli));
+//
+//        assertEquals(1, paneeli.getComponentCount());
+//    }
+//
+////    @Test
+////    public void luoJaLisaaUudenOikeinKortin() throws IOException {
+////        JPanel paneeli = new JPanel();
+////        paneeli.setLayout(null);
+////        piirra.tuoKuvatSpritesta();
+////
+////        paneeli.add(piirra.piirraOikein(paneeli, 1));
+////
+////        assertEquals(1, paneeli.getComponentCount());
+////    }
+//
+//    @Test
+//    public void luoJaLisaaUudenNurinKortin() {
+//        JPanel paneeli = new JPanel();
+//        paneeli.setLayout(null);
+//
+//        paneeli.add(piirra.piirraNurin(paneeli, 1));
+//
+//        assertEquals(1, paneeli.getComponentCount());
+//    }
+//
+//    @Test
+//    public void piirtaaTyhjanKortinOikeallePaikalle() {
+//        JPanel paneeli = new JPanel();
+//        paneeli.setLayout(null);
+//        JLabel kortti = piirra.piirraTyhja(paneeli);
+//
+//        Point piste = new Point();
+//        piste.setLocation(20, 20);
+//
+//        assertEquals(piste, kortti.getLocation());
+//
+//    }
+//
+//    @Test
+//    public void piirtaaKaannetynKortinOikeallePaikalle() throws IOException {
+//        piirra.tuoKuvatSpritesta();
+//
+//        JPanel paneeli = new JPanel();
+//        paneeli.setLayout(null);
+//        JLabel kortti = piirra.piirraOikein(paneeli, 2);
+//
+//        Point piste = new Point();
+//        piste.setLocation(20, 40);
+//
+//        assertEquals(piste, kortti.getLocation());
+//
+//    }
+//
+//    @Test
+//    public void piirtaaNurinKortinOikeallePaikalle() {
+//        JPanel paneeli = new JPanel();
+//        paneeli.setLayout(null);
+//        JLabel kortti = piirra.piirraNurin(paneeli, 4);
+//
+//        Point piste = new Point();
+//        piste.setLocation(20, 80);
+//
+//        assertEquals(piste, kortti.getLocation());
+//    }
 }

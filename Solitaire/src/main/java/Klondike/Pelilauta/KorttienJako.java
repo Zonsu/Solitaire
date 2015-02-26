@@ -1,5 +1,6 @@
 package Klondike.Pelilauta;
 
+import Klondike.GraafinenUi.KorttienKuvat;
 import static Klondike.Pelilauta.Pelilauta.maaliPinot;
 import static Klondike.Pelilauta.Pelilauta.pinotNurin;
 import static Klondike.Pelilauta.Pelilauta.pinotOikein;
@@ -46,6 +47,10 @@ public class KorttienJako {
         alustaMaalipinot();
         alustaPakka();
     }
+    
+    public static ArrayList<Kortti> getKorttiPakka() {
+        return korttiPakka;
+    }
 
     /**
      * Luodaan 52 korttia, 4 maata joissa jokaisessa 13 korttia.
@@ -63,15 +68,19 @@ public class KorttienJako {
 
                 if (i == 0) {
                     kortti.setMaa("Pata");
+                    KorttienKuvat.liitaKuvaKorttiin(kortti);
                 }
                 if (i == 1) {
                     kortti.setMaa("Hertta");
+                    KorttienKuvat.liitaKuvaKorttiin(kortti);
                 }
                 if (i == 2) {
                     kortti.setMaa("Risti");
+                    KorttienKuvat.liitaKuvaKorttiin(kortti);
                 }
                 if (i == 3) {
                     kortti.setMaa("Ruutu");
+                    KorttienKuvat.liitaKuvaKorttiin(kortti);
                 }
                 pakka.add(kortti);
             }

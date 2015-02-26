@@ -1,6 +1,9 @@
 package Klondike.Pelilauta;
 
+import Klondike.GraafinenUi.KorttienKuvat;
+import java.awt.image.BufferedImage;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 
 /**
  * Tästä luokasta generoidaan pelissä käytettävät kortit. Kortin arvo voi olla
@@ -14,6 +17,7 @@ public class Kortti {
     private String maa;
     private String vari;
     private int arvo;
+    private BufferedImage kuva;
 
     public Kortti(int arvo) {
         this.maa = "";
@@ -33,7 +37,6 @@ public class Kortti {
         } else {
             this.vari = "musta";
         }
-
     }
 
     public int getArvo() {
@@ -46,6 +49,14 @@ public class Kortti {
 
     public void setArvo(int arvo) {
         this.arvo = arvo;
+    }
+    
+    public void setKuva(BufferedImage kuva) {
+        this.kuva = kuva;
+    }
+    
+    public BufferedImage getKuva() {
+        return this.kuva;
     }
 
     @Override

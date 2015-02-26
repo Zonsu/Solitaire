@@ -96,4 +96,12 @@ public class KorttienJakoTest {
         Korttipino pino = palautaPino(2, 0);
         assertEquals(0, pino.pinonKoko());
     }
+    @Test
+    public void palauttaaPakan() {
+        uudetKortit();
+
+        korttiPakka = getKorttiPakka();
+        
+        assertEquals(52, korttiPakka.size());
+    }
 }

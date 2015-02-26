@@ -5,14 +5,15 @@
  */
 package Klondike.GraafinenUi;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class PiirrettyKortti {
     
-    private JLabel kuva;
+    private JButton kuva;
     private int pino;
 
-    public PiirrettyKortti(JLabel kuva, int pino) {
+    public PiirrettyKortti(JButton kuva, int pino) {
         this.kuva = kuva;
         this.pino = pino;
     }

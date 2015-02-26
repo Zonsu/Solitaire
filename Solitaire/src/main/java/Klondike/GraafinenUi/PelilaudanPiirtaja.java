@@ -1,8 +1,12 @@
 package Klondike.GraafinenUi;
 
+import Klondike.Pelilauta.KorttienJako;
+import Klondike.GraafinenUi.KorttienKuvat;
+import Klondike.Pelilauta.Kortti;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.logging.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,17 +18,10 @@ import javax.swing.*;
  */
 public class PelilaudanPiirtaja {
 
-    public BufferedImage[] padat;
-    public BufferedImage[] hertat;
-    public BufferedImage[] ristit;
-    public BufferedImage[] ruudut;
+
     public ImageIcon tausta;
     public ImageIcon tyhja;
-
-    /* Korttilaskuri tulee käyttöön kun sekoitetusta pakasta otetaan kortteja. Ei vielä implementoitu
-     */
     private int korttiLaskuri;
-    
 
     void luoKomponentit(Container container) {
 
@@ -34,10 +31,15 @@ public class PelilaudanPiirtaja {
         container.setLayout(new GridLayout(2, 7, 0, 0));
 
         try {
-            tuoKuvatSpritesta();
+            KorttienKuvat.tuoKuvatSpritesta();
         } catch (IOException ex) {
             Logger.getLogger(Kayttoliittyma.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        KorttienJako.uudetKortit();
+
+        tausta = KorttienKuvat.getTausta();
+        tyhja = KorttienKuvat.getTyhja();
 
         alustaPakat(container);
 
@@ -55,7 +57,12 @@ public class PelilaudanPiirtaja {
         /*
          Jaetaan oikea määrä oikeanlaisia kortteja pöydälle. Ensin pakka ja tyhjä pino.
          */
-        uusiPaneeli(1, 0, container);
+        JPanel pakkaPaneeli = new JPanel();
+        pakkaPaneeli.setLayout(null);
+        pakkaPaneeli.add(piirraPakka(pakkaPaneeli));
+        container.add(pakkaPaneeli);
+
+        
         uusiPaneeli(0, 0, container);
 
         /*
@@ -72,7 +79,7 @@ public class PelilaudanPiirtaja {
             uusiPaneeli(0, 0, container);
         }
         /*
-         Alimmalle riville seitsemän eri kokoista pakkaa joiden päällä käännetty kortti.
+         Alimmalle riville seitsemän eri kokoista pakkaa joiden päällä käännetty img.
          */
 
         for (int i = 0; i < 7; i++) {
@@ -89,30 +96,28 @@ public class PelilaudanPiirtaja {
      * @param oikein: ja montako oikein
      * @param container
      */
-    public void uusiPaneeli(int nurin, int oikein, Container container) {
-        JPanel paneeli = new JPanel();
+    public void uusiPaneeli(int nurin, int oikein, JPanel paneeli) {
+  
         paneeli.setLayout(null);
-        int pinoLaskuri = 0;
 
         if (nurin == 0 && oikein == 0) {
             paneeli.add(piirraTyhja(paneeli));
         }
 
         for (int i = 0; i < oikein; i++) {
-            JLabel kortti;
-            
+            JButton kortti;
+
             kortti = piirraOikein(paneeli, nurin + oikein - i);
             paneeli.add(kortti);
-            PiirrettyKortti piirretyKortti = new PiirrettyKortti(kortti, pinoLaskuri);
-            
-            pinoLaskuri++;
+            korttiLaskuri++;
+
         }
 
         for (int i = 0; i < nurin; i++) {
             paneeli.add(piirraNurin(paneeli, nurin - i));
+            korttiLaskuri++;
         }
-       
-        container.add(paneeli);
+  
     }
 
     /**
@@ -121,18 +126,18 @@ public class PelilaudanPiirtaja {
      * @param paneeli: annetaan parametrina paneeli jotta saadaan sen speksit
      * metodille
      * @param monesko: kertoo montako korttia vielä piirretään, eli mihin
-     * paikkaan lautaa kortti piirretään
+     * paikkaan lautaa img piirretään
      * @return
      */
     public JLabel piirraNurin(JPanel paneeli, int monesko) {
 
-        ImageIcon kortti;
+        ImageIcon img;
         JLabel kuva;
         Insets insets;
         Dimension size;
 
-        kortti = tausta;
-        kuva = new JLabel(kortti);
+        img = tausta;
+        kuva = new JLabel(img);
 
         insets = paneeli.getInsets();
         size = kuva.getPreferredSize();
@@ -149,27 +154,30 @@ public class PelilaudanPiirtaja {
      * @param monesko
      * @return
      */
-    public JLabel piirraOikein(JPanel paneeli, int monesko) {
+    public JButton piirraOikein(JPanel paneeli, int monesko) {
 
-        BufferedImage kortti;
-        JLabel kuva;
+        ImageIcon img;
+        BufferedImage bufImg = null;
+        JButton kuva;
         Insets insets;
         Dimension size;
 
-        /*
-         Tässä välissä tulevaisuudessa kysytään KorttienJaolta mikä kortti jaetaan. 
-         Nyt placeholderina muita kortteja.
-         */
-        if (korttiLaskuri > 12) {
-            korttiLaskuri = 0;
-        }
-        kortti = hertat[korttiLaskuri];
-        korttiLaskuri++;
-        kuva = new JLabel(new ImageIcon(kortti));
+        ArrayList<Kortti> korttipakka = new ArrayList<Kortti>();
+        korttipakka = KorttienJako.getKorttiPakka();
+
+        Kortti kortti = korttipakka.get(korttiLaskuri);
+        
+        bufImg = kortti.getKuva();
+        img = new ImageIcon(bufImg);
+        
+        kuva = new JButton(img);
+        
         insets = paneeli.getInsets();
 
+        kuva.setPreferredSize(new Dimension(72, 100));
         size = kuva.getPreferredSize();
-        kuva.setBounds(20 + insets.left, monesko * 20 + insets.top + insets.top,
+
+        kuva.setBounds(20 + insets.left, monesko * 20 + insets.top,
                 size.width, size.height);
 
         return kuva;
@@ -181,18 +189,42 @@ public class PelilaudanPiirtaja {
      * @param paneeli
      * @return
      */
-    public JLabel piirraTyhja(JPanel paneeli) {
+    public JButton piirraTyhja(JPanel paneeli) {
 
-        ImageIcon kortti;
-        JLabel kuva;
+        ImageIcon img;
+        JButton kuva;
         Insets insets;
         Dimension size;
 
-        kortti = tyhja;
-        kuva = new JLabel(kortti);
+        img = tyhja;
+        kuva = new JButton(img);
 
         insets = paneeli.getInsets();
+
+        kuva.setPreferredSize(new Dimension(72, 100));
         size = kuva.getPreferredSize();
+
+        kuva.setBounds(20 + insets.left, 20 + insets.top,
+                size.width, size.height);
+
+        return kuva;
+    }
+
+    public JButton piirraPakka(JPanel paneeli) {
+
+        ImageIcon img;
+        JButton kuva;
+        Insets insets;
+        Dimension size;
+
+        img = tausta;
+        kuva = new JButton(img);
+
+        insets = paneeli.getInsets();
+
+        kuva.setPreferredSize(new Dimension(72, 100));
+        size = kuva.getPreferredSize();
+
         kuva.setBounds(20 + insets.left, 20 + insets.top,
                 size.width, size.height);
 
@@ -205,68 +237,11 @@ public class PelilaudanPiirtaja {
      *
      * @throws IOException
      */
-    public void tuoKuvatSpritesta() throws IOException {
-        BufferedImage sprite = ImageIO.read(new File("src/main/resources/Images/temp_cards_sprite.gif"));
-
-        final int width = 72;
-        final int height = 100;
-        final int rows = 4;
-        final int cols = 13;
-
-        padat = new BufferedImage[cols];
-        hertat = new BufferedImage[cols];
-        ristit = new BufferedImage[cols];
-        ruudut = new BufferedImage[cols];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-
-                if (i == 0) {
-                    hertat[j] = sprite.getSubimage(
-                            j * width,
-                            i * height,
-                            width,
-                            height
-                    );
-                }
-                if (i == 1) {
-                    ruudut[j] = sprite.getSubimage(
-                            j * width,
-                            i * height,
-                            width,
-                            height
-                    );
-                }
-                if (i == 2) {
-                    ristit[j] = sprite.getSubimage(
-                            j * width,
-                            i * height,
-                            width,
-                            height
-                    );
-                }
-                if (i == 3) {
-                    padat[j] = sprite.getSubimage(
-                            j * width,
-                            i * height,
-                            width,
-                            height
-                    );
-                }
-            }
-        }
-        BufferedImage kuva = sprite.getSubimage(0, 400, width, height);
-        tausta = new ImageIcon(kuva);
-
-        kuva = sprite.getSubimage(147, 400, width, height);
-        tyhja = new ImageIcon(kuva);
-    }
-
 }
 
 //        for (int i = 0; i < 1; i++) {
-//            BufferedImage kortti = sprites[i];
-//            JLabel kuva = new JLabel(new ImageIcon(kortti));
+//            BufferedImage img = sprites[i];
+//            JLabel kuva = new JLabel(new ImageIcon(img));
 //
 //            paneeli.add(kuva);
 //
@@ -327,7 +302,7 @@ public class PelilaudanPiirtaja {
 //            paneeli.setLayout(overlay);
 //            paneeli.setBackground(Color.green);
 //
-//            //BufferedImage kortti = sprites[2];
+//            //BufferedImage img = sprites[2];
 //            BufferedImage kortti2 = sprites[5];
 //            JLabel kuva2 = new JLabel(new ImageIcon(kortti2));
 //            paneeli.add(kuva2);

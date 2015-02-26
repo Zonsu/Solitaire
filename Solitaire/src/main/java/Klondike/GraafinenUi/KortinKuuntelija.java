@@ -10,12 +10,12 @@ import java.awt.event.*;
  *
  * @author Zonsu
  */
-public class KentanKuuntelija implements ActionListener {
+public class KortinKuuntelija implements ActionListener {
 
     //Paikka kertoo mihin sarakkeeseen kortti piirretään tai mistä poistetaan.
     private int paikka;
 
-    public KentanKuuntelija(int paikka) {
+    public KortinKuuntelija(int paikka) {
         this.paikka = paikka;
 
     }
