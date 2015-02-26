@@ -5,7 +5,11 @@
  */
 package Klondike.GraafinenUi;
 
+import Klondike.Pelilauta.Kortti;
+import Klondike.Pelilauta.Korttipino;
+import Klondike.Pelilauta.Pelilauta;
 import Klondike.Pelilogiikka.KlikkausLaskuri;
+import Klondike.Pelilogiikka.KortinSiirto;
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -22,7 +26,11 @@ public class KorttipakanKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
+        Kortti kortti = KortinSiirto.kaannaKortti(0);
+        System.out.println("Kuuntelijalle palautettiin: " + kortti);
+        PelilaudanPiirtaja.piirraKaannetty(kortti);
+
     }
 
 }

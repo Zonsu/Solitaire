@@ -36,11 +36,13 @@ public class KortinSiirto {
      *
      * @param pakan paikka
      */
-    public static void kaannaKortti(int mista) {
+    public static Kortti kaannaKortti(int mista) {
 
+        Kortti kaannetty = null;
         if (mista == 0) {
 
-            nostaKorttiPakasta();
+            kaannetty = nostaKorttiPakasta();
+            
 
         } else {
             maaliPino = pinotOikein[mista];
@@ -57,6 +59,8 @@ public class KortinSiirto {
                 pinotNurin[mista] = lahtoPino;
             }
         }
+        
+        return kaannetty;
     }
 
     /**
@@ -77,11 +81,15 @@ public class KortinSiirto {
      * Käännetään pakasta kortti jos siellä niitä on, muuten käännetään jo
      * avatut uudeksi pakaksi, niin että päälimmäinen jää pohjalle.
      */
-    public static void nostaKorttiPakasta() {
+    public static Kortti nostaKorttiPakasta() {
+        
         Korttipino pakka = pinotNurin[0];
         Korttipino kaannetyt = pinotOikein[0];
+        
+        Kortti kaannetty = null;
 
         if (pakka.pinonKoko() == 0) {
+            System.out.println("sekoitetaan");
 
             ArrayList<Kortti> kortit = kaannetyt.getKortit();
             for (int i = 0; i < kortit.size(); i++) {
@@ -91,9 +99,13 @@ public class KortinSiirto {
             siirrettava = pakka.naytaPaalimmainen();
             pakka.nostaPaalimmainen();
             kaannetyt.lisaaKortti(siirrettava);
+            kaannetty = siirrettava;
+            System.out.println("käännetään " + kaannetty);
         }
         pinotNurin[0] = pakka;
         pinotOikein[0] = kaannetyt;
+        
+        return kaannetty;
 
     }
 

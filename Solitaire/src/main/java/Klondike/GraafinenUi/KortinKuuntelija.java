@@ -36,8 +36,11 @@ public class KortinKuuntelija implements ActionListener {
         Point piste = kortti.getLocation();
         y = (int) piste.getY() /20 -1;
         
+        
         Container vanhempi = kortti.getParent();
+        
         Point vanhempiPiste = vanhempi.getLocation();
+        y = (int) (vanhempiPiste.getY()/vanhempi.getHeight()) + piste.y;
         x = ((int)vanhempiPiste.getX()/vanhempi.getWidth());
         
         KlikkausLaskuri.lisaaKlikkaus(x, y, kortti);

@@ -29,6 +29,31 @@ public class Pelilauta {
     public static Korttipino[] getMaaliPinot() {
         return maaliPinot;
     }
-    
 
+    public static Korttipino getNurinPino(int i) {
+        return pinotNurin[i];
+    }
+
+    public static Korttipino getOikeinPino(int i) {
+        return pinotNurin[i];
+    }
+
+    public static Korttipino getMaaliPino(int i) {
+        return maaliPinot[i];
+    }
+
+    public static Kortti getNurinPaalimmainen(int i) {
+        Korttipino pino = getNurinPino(i);
+        return pino.naytaPaalimmainen();
+    }
+
+    public static Kortti getOikeinPaalimmainen(int i) {
+        Korttipino pino = getOikeinPino(i);
+        return pino.naytaPaalimmainen();
+    }
+
+    public static Kortti getMaalipinoPaalimmainen(int i) {
+        Korttipino pino = getMaaliPino(i);
+        return pino.naytaPaalimmainen();
+    }
 }

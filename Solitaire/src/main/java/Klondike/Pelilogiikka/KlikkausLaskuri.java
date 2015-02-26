@@ -41,7 +41,7 @@ public class KlikkausLaskuri {
                     System.out.println("Eka kortti: " + x + " " + y);
                     System.out.println("Toka kortti: " + korttiX + " " + korttiY);
                     
-                    KortinSiirto.siirraKortti(x, korttiX);
+//                    KortinSiirto.siirraKortti(x, korttiX);
                     
 //                    Kortti kortti1 = 
 //                    

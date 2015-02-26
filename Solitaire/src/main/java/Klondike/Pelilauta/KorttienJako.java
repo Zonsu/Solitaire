@@ -136,7 +136,7 @@ public class KorttienJako {
             }
             // Jaetaan kortti kuvapuoli ylöspäin.
             kortitOikein.lisaaKortti(korttiPakka.get(korttiPakka.size() - pinoLaskuri));
-
+            
             pinoLaskuri++;
             pinotNurin[i] = kortitNurin;
             pinotOikein[i] = kortitOikein;

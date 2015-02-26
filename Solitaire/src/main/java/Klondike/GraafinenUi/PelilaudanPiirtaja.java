@@ -3,6 +3,8 @@ package Klondike.GraafinenUi;
 import Klondike.Pelilauta.KorttienJako;
 import Klondike.GraafinenUi.KorttienKuvat;
 import Klondike.Pelilauta.Kortti;
+import Klondike.Pelilauta.Korttipino;
+import Klondike.Pelilauta.Pelilauta;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -19,10 +21,37 @@ import javax.swing.*;
 public class PelilaudanPiirtaja {
 
     public ImageIcon tausta;
-    public ImageIcon tyhja;
+    public static ImageIcon tyhja;
     private int korttiLaskuri;
-
     private static JPanel[] pinot = new JPanel[10];
+
+    static JPanel pakka = new JPanel();
+
+    static JPanel tyhjaPakka = new JPanel();
+
+    static JPanel laatikko = new JPanel();
+
+    static JPanel maaliPino1 = new JPanel();
+
+    static JPanel maaliPino2 = new JPanel();
+
+    static JPanel maaliPino3 = new JPanel();
+
+    static JPanel maaliPino4 = new JPanel();
+
+    static JPanel pino1 = new JPanel();
+
+    static JPanel pino2 = new JPanel();
+
+    static JPanel pino3 = new JPanel();
+
+    static JPanel pino4 = new JPanel();
+
+    static JPanel pino5 = new JPanel();
+
+    static JPanel pino6 = new JPanel();
+
+    static JPanel pino7 = new JPanel();
 
     void luoKomponentit(Container container) {
 
@@ -59,7 +88,6 @@ public class PelilaudanPiirtaja {
         /*
          Jaetaan oikea määrä oikeanlaisia kortteja pöydälle. Ensin pakka ja tyhjä pino.
          */
-        JPanel pakka = new JPanel();
         pakka.setLayout(null);
         JButton korttipakka = piirraPakka(pakka);
         pakka.add(korttipakka);
@@ -67,7 +95,6 @@ public class PelilaudanPiirtaja {
         korttipakka.addActionListener(kuuntelija);
         container.add(pakka);
 
-        JPanel tyhjaPakka = new JPanel();
         tyhjaPakka.setLayout(null);
         uusiPaneeli(0, 0, tyhjaPakka);
         container.add(tyhjaPakka);
@@ -75,29 +102,24 @@ public class PelilaudanPiirtaja {
         /*
          Tehdään tyhjä paneeli esteettisistä syistä.
          */
-        JPanel laatikko = new JPanel();
         laatikko.setLayout(null);
         container.add(laatikko);
 
         /*
          Neljä maalipinoa.
          */
-        JPanel maaliPino1 = new JPanel();
         maaliPino1.setLayout(null);
         uusiPaneeli(0, 0, maaliPino1);
         container.add(maaliPino1);
 
-        JPanel maaliPino2 = new JPanel();
         maaliPino2.setLayout(null);
         uusiPaneeli(0, 0, maaliPino2);
         container.add(maaliPino2);
 
-        JPanel maaliPino3 = new JPanel();
         maaliPino3.setLayout(null);
         uusiPaneeli(0, 0, maaliPino3);
         container.add(maaliPino3);
 
-        JPanel maaliPino4 = new JPanel();
         maaliPino4.setLayout(null);
         uusiPaneeli(0, 0, maaliPino4);
         container.add(maaliPino4);
@@ -105,43 +127,36 @@ public class PelilaudanPiirtaja {
          Alimmalle riville seitsemän eri kokoista pakkaa joiden päällä käännetty img.
          */
 
-        JPanel pino1 = new JPanel();
         pino1.setLayout(null);
         uusiPaneeli(0, 1, pino1);
         container.add(pino1);
         pinot[0] = pino1;
 
-        JPanel pino2 = new JPanel();
         pino2.setLayout(null);
         uusiPaneeli(1, 1, pino2);
         container.add(pino2);
         pinot[1] = pino2;
 
-        JPanel pino3 = new JPanel();
         pino3.setLayout(null);
         uusiPaneeli(2, 1, pino3);
         container.add(pino3);
         pinot[2] = pino3;
 
-        JPanel pino4 = new JPanel();
         pino4.setLayout(null);
         uusiPaneeli(3, 1, pino4);
         container.add(pino4);
         pinot[3] = pino4;
 
-        JPanel pino5 = new JPanel();
         pino5.setLayout(null);
         uusiPaneeli(4, 1, pino5);
         container.add(pino5);
         pinot[4] = pino5;
 
-        JPanel pino6 = new JPanel();
         pino6.setLayout(null);
         uusiPaneeli(5, 1, pino6);
         container.add(pino6);
         pinot[5] = pino6;
 
-        JPanel pino7 = new JPanel();
         pino7.setLayout(null);
         pino7.revalidate();
         uusiPaneeli(6, 1, pino7);
@@ -165,19 +180,17 @@ public class PelilaudanPiirtaja {
 
         if (nurin == 0 && oikein == 0) {
             paneeli.add(piirraTyhja(paneeli));
+
         } else {
 
             for (int i = 0; i < oikein; i++) {
                 JButton kortti;
 
-                korttiLaskuri = korttiLaskuri + nurin;
-
-                kortti = piirraOikein(paneeli, nurin + oikein - i);
+                kortti = piirraOikein(paneeli, nurin + oikein - i, nurin+1);
                 paneeli.add(kortti);
                 KortinKuuntelija kuuntelija = new KortinKuuntelija(kortti);
                 kortti.addActionListener(kuuntelija);
 
-                korttiLaskuri++;
 
             }
 
@@ -223,21 +236,15 @@ public class PelilaudanPiirtaja {
      * @param monesko
      * @return
      */
-    public JButton piirraOikein(JPanel paneeli, int monesko) {
+    public JButton piirraOikein(JPanel paneeli, int monesko, int i) {
 
         ImageIcon img;
         BufferedImage bufImg = null;
         JButton kuva;
         Insets insets;
         Dimension size;
-
-        ArrayList<Kortti> korttipakka = new ArrayList<Kortti>();
-        korttipakka = KorttienJako.getKorttiPakka();
-
         
-        
-        
-        Kortti kortti = korttipakka.get(korttiLaskuri);
+        Kortti kortti = Pelilauta.getOikeinPaalimmainen(i);
 
         bufImg = kortti.getKuva();
         img = new ImageIcon(bufImg);
@@ -261,7 +268,7 @@ public class PelilaudanPiirtaja {
      * @param paneeli
      * @return
      */
-    public JButton piirraTyhja(JPanel paneeli) {
+    public static JButton piirraTyhja(JPanel paneeli) {
 
         ImageIcon img;
         JButton kuva;
@@ -279,7 +286,50 @@ public class PelilaudanPiirtaja {
         kuva.setBounds(20 + insets.left, 20 + insets.top,
                 size.width, size.height);
 
+        KortinKuuntelija kuuntelija = new KortinKuuntelija(kuva);
+        kuva.addActionListener(kuuntelija);
+
         return kuva;
+    }
+
+    public static void piirraKaannetty(Kortti kortti) {
+
+        ImageIcon img;
+        JButton kuva;
+        Insets insets;
+        Dimension size;
+        BufferedImage bufImg = null;
+
+        if (kortti == null) {
+
+            tyhjaPakka.removeAll();
+
+            JButton kort = piirraTyhja(tyhjaPakka);
+            tyhjaPakka.add(kort);
+
+        } else {
+
+            tyhjaPakka.removeAll();
+            System.out.println("Piirretään " + kortti);
+            bufImg = kortti.getKuva();
+            img = new ImageIcon(bufImg);
+
+            kuva = new JButton(img);
+
+            insets = tyhjaPakka.getInsets();
+
+            kuva.setPreferredSize(new Dimension(72, 100));
+            size = kuva.getPreferredSize();
+
+            kuva.setBounds(20 + insets.left, 20 + insets.top,
+                    size.width, size.height);
+
+            tyhjaPakka.add(kuva);
+            KortinKuuntelija kuuntelija = new KortinKuuntelija(kuva);
+            kuva.addActionListener(kuuntelija);
+        }
+        tyhjaPakka.repaint();
+
     }
 
 //    public JButton piirraPiilotettu(JPanel paneeli, int monesko) {
@@ -329,7 +379,7 @@ public class PelilaudanPiirtaja {
         pino = pinot[mihin / 20 - 1];
         int montako = pino.getComponentCount();
         pino.add(mika);
-        
+
         Kayttoliittyma.frame.pack();
     }
 
