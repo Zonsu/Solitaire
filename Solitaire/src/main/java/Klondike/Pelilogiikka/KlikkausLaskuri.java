@@ -1,5 +1,8 @@
 package Klondike.Pelilogiikka;
 
+import Klondike.GraafinenUi.PelilaudanPiirtaja;
+import javax.swing.JButton;
+
 /**
  * Luokka pitää kirjaa kenttien saamasta klikkausten määristä ja tekee niiden
  * perusteella päätöksen yritetäänkö korttia siirtää ja minne.
@@ -8,39 +11,51 @@ package Klondike.Pelilogiikka;
  */
 public class KlikkausLaskuri {
 
-    //Klikkauksia korkeintaan 2 samaan aikaan, eli paikat joiden välillä siirto tehdään.
-    static int paikka1;
-    static int paikka2;
-
-    public KlikkausLaskuri() {
-        this.paikka1 = 0;
-        this.paikka2 = 0;
-    }
+    private static int x;
+    private static int y;
+    private static int laskuri;
+    private static JButton muistiKortti;
 
     /**
      * Metodi kuuntelee korttien klikkauksia. Jos peräkkäin klikataan kahta eri
-     * korttia, lähdetään suorittamaan metodia joka yrittää siirtää korttia.
+     * korttia, tarkistetaanko saako korttia siirtää. Laskuri 0 tai 1, 0: ei
+     * valittua korttia, 1: valittu kortti siirrettäväksi
      *
      * @param tarkistetaan missä kohdassa olevaa korttia on klikattu
      */
-    public static void lisaaKlikkaus(int paikka) {
+    public static void lisaaKlikkaus(int korttiX, int korttiY, JButton kortti) {
 
-        if (paikka1 == 0) {
-            paikka1 = paikka;
+        if (laskuri == 0) {
+            x = korttiX;
+            y = korttiY;
+            muistiKortti = kortti;
+            
+            laskuri++;
 
-        } else if (paikka1 == paikka) {
-            paikka1 = 0;
+        } else if (laskuri == 1) {
 
-        } else {
-            paikka2 = paikka;
+            if (x == korttiX && y == korttiY) {
+                laskuri = 0;
+            } else {
+                if (KortinSiirto.saakoSiirtaa(x, y, korttiX, korttiY)) {
+                    System.out.println("Eka kortti: " + x + " " + y);
+                    System.out.println("Toka kortti: " + korttiX + " " + korttiY);
+                    
+                    KortinSiirto.siirraKortti(x, korttiX);
+                    
+//                    Kortti kortti1 = 
+//                    
+//                    PelilaudanPiirtaja.siirraKortti(x, muistiKortti, korttiX, kortti);
+                    
+                    
+                    laskuri = 0;
 
-            /*
-               Kutsutaan metodia joka yrittää siirtää korttia.  
-            */
-            paikka1 = 0;
-            paikka2 = 0;
+                } else {
+                    laskuri = 0;
+                }
+            }
         }
-
+        System.out.println("Klikkauksia: " + laskuri);
+        System.out.println("");
     }
-
 }

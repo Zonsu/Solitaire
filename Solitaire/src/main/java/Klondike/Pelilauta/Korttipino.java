@@ -54,6 +54,7 @@ public class Korttipino {
     }
 
     public Kortti naytaPaalimmainen() {
+        
         return this.kortit.get(kortit.size() - 1);
     }
 

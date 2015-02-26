@@ -11,7 +11,7 @@ import javax.swing.*;
  */
 public class Kayttoliittyma implements Runnable {
 
-    private JFrame frame;
+    static JFrame frame;
 
     public Kayttoliittyma() {
     }

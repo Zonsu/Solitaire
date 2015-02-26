@@ -20,6 +20,17 @@ public class KortinSiirto {
     private static Kortti verrattava;
 
     /**
+     *
+     * @param ekaX
+     * @param tokaY
+     * @param ekaX
+     * @param tokaY
+     */
+    public static boolean saakoSiirtaa(int ekaX, int ekaY, int tokaX, int tokaY) {
+        return true;
+    }
+    
+    /**
      * Käännetään paljastuneesta nurinpäin olevasta pakasta sen päälle uusi
      * kortti näkyviin.
      *
@@ -96,10 +107,13 @@ public class KortinSiirto {
     public static void siirraKortti(int mista, int mihin) {
 
         lahtoPino = pinotOikein[mista];
+        System.out.println("Lähtöpinon koko: " + lahtoPino.pinonKoko());
         siirrettava = lahtoPino.naytaPaalimmainen();
+        System.out.println("Ekan päälimmäinen: " + lahtoPino.naytaPaalimmainen());
 
         maaliPino = pinotOikein[mihin];
         verrattava = maaliPino.naytaPaalimmainen();
+        System.out.println("Tokan päälimmäinen: " + maaliPino.naytaPaalimmainen());
 
         if (maaliPino.pinonKoko() > 0 && onkoLaillinenSiirto(siirrettava, verrattava)) {
             

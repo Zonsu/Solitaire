@@ -21,11 +21,23 @@ import static org.junit.Assert.*;
  */
 public class KortinSiirtoTest {
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
     @Before
 
     public void setUp() {
         luoPakka();
         jaaUudestaan();
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
 
     @Test
@@ -186,5 +198,85 @@ public class KortinSiirtoTest {
         testiPino = pinotOikein[1];
 
         assertEquals(testiKortti, testiPino.naytaPaalimmainen());
+    }
+
+    /**
+     * Test of kaannaKortti method, of class KortinSiirto.
+     */
+    @Test
+    public void testKaannaKortti() {
+        System.out.println("kaannaKortti");
+        int mista = 0;
+        KortinSiirto.kaannaKortti(mista);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of siirraPino method, of class KortinSiirto.
+     */
+    @Test
+    public void testSiirraPino() {
+        System.out.println("siirraPino");
+        int mista = 0;
+        int monesko = 0;
+        int mihin = 0;
+        KortinSiirto.siirraPino(mista, monesko, mihin);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of nostaKorttiPakasta method, of class KortinSiirto.
+     */
+    @Test
+    public void testNostaKorttiPakasta() {
+        System.out.println("nostaKorttiPakasta");
+        KortinSiirto.nostaKorttiPakasta();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of siirraKortti method, of class KortinSiirto.
+     */
+    @Test
+    public void testSiirraKortti() {
+        System.out.println("siirraKortti");
+        int mista = 0;
+        int mihin = 0;
+        KortinSiirto.siirraKortti(mista, mihin);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of onkoLaillinenSiirto method, of class KortinSiirto.
+     */
+    @Test
+    public void testOnkoLaillinenSiirto() {
+        System.out.println("onkoLaillinenSiirto");
+        Kortti siirrettavaKortti = null;
+        Kortti verrattavaKortti = null;
+        boolean expResult = false;
+        boolean result = KortinSiirto.onkoLaillinenSiirto(siirrettavaKortti, verrattavaKortti);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of onkoLaillinenSiirtoMaalipinoon method, of class KortinSiirto.
+     */
+    @Test
+    public void testOnkoLaillinenSiirtoMaalipinoon() {
+        System.out.println("onkoLaillinenSiirtoMaalipinoon");
+        Kortti siirrettavaKortti = null;
+        Kortti verrattavaKortti = null;
+        boolean expResult = false;
+        boolean result = KortinSiirto.onkoLaillinenSiirtoMaalipinoon(siirrettavaKortti, verrattavaKortti);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 }
