@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author joqpaavo
+ *  Generoidaan pelikorteille kuvat joita käytetään piirtämiseen
+ * @author Zonsu
  */
 public class KorttienKuvat {
 
@@ -21,41 +21,57 @@ public class KorttienKuvat {
     public static ImageIcon tyhja;
     public static BufferedImage kuva;
 
+    /**
+     * Jokainen kortti BufferedImage kuvan joka on kortin visuaalinen edustus.
+     *
+     * @param kortti
+     */
     public static void liitaKuvaKorttiin(Kortti kortti) {
 
         kuva = null;
 
         if (kortti.getMaa().equals("Pata")) {
-            kuva = padat[kortti.getArvo()-1];
+            kuva = padat[kortti.getArvo() - 1];
             kortti.setKuva(kuva);
 
         } else if (kortti.getMaa().equals("Hertta")) {
-            kuva = hertat[kortti.getArvo()-1];
+            kuva = hertat[kortti.getArvo() - 1];
             kortti.setKuva(kuva);
 
         } else if (kortti.getMaa().equals("Risti")) {
-            kuva = ristit[kortti.getArvo()-1];
+            kuva = ristit[kortti.getArvo() - 1];
             kortti.setKuva(kuva);
 
         } else if (kortti.getMaa().equals("Ruutu")) {
-            kuva = ruudut[kortti.getArvo()-1];
+            kuva = ruudut[kortti.getArvo() - 1];
             kortti.setKuva(kuva);
 
         }
 
     }
 
+    /*
+     Palautetetaan kuva kortin taustalle.
+     */
     public static ImageIcon getTausta() {
         return tausta;
     }
+    /*
+     Palautetaan kuva tyhjälle kortille.
+     */
 
     public static ImageIcon getTyhja() {
         return tyhja;
     }
 
-
+    /**
+     * Luodaan spritesta pelissä käytettävät kortit. Kortit kokoa 72 x 100,
+     * talletetaan maittain listoihin.
+     *
+     * @throws IOException
+     */
     public static void tuoKuvatSpritesta() throws IOException {
-        BufferedImage sprite = ImageIO.read(new File("src/main/resources/Images/temp_cards_sprite.gif"));
+        BufferedImage sprite = ImageIO.read(KorttienKuvat.class.getResource("/temp_cards_sprite.gif"));
 
         final int width = 72;
         final int height = 100;
@@ -104,6 +120,8 @@ public class KorttienKuvat {
                 }
             }
         }
+        
+        //Taustalle ja tyhjälle kuvalle omansa
         BufferedImage kuva = sprite.getSubimage(0, 400, width, height);
         tausta = new ImageIcon(kuva);
 

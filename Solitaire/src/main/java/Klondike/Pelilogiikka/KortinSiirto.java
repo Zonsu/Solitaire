@@ -24,10 +24,10 @@ public class KortinSiirto {
 
     /**
      *
-     * @param ekaX
-     * @param tokaY
-     * @param ekaX
-     * @param tokaY
+     * @param ekaX koordinaatti
+     * @param tokaY koordinaatti
+     * @param ekaX koordinaatti
+     * @param tokaY koordinaatti
      */
     public static boolean saakoSiirtaa(int ekaX, int ekaY, int tokaX, int tokaY) {
         Kortti kortti1 = null;
@@ -47,10 +47,10 @@ public class KortinSiirto {
         if (ekaY == 20 && ekaX == 2) {
             lahtoPino = pinotOikein[0];
             kortti1 = lahtoPino.naytaPaalimmainen();
-            System.out.println("Päälimmäinen: " + kortti1);
+
         } else {
             lahtoPino = pinotOikein[ekaX];
-//            kortti1 = lahtoPino.naytaPaalimmainen();
+            kortti1 = lahtoPino.naytaPaalimmainen();
             kortti1 = lahtoPino.getKortti(kortinIndeksi(ekaX, ekaY));
         }
 
@@ -58,12 +58,10 @@ public class KortinSiirto {
          Tyhään maalipinoon siirretään vain ässä. Ässän päälle vain samaa maata numeroa isompana jne.
          */
         if (tokaY == 20 && tokaX > 3) {
-            System.out.println("Maalipinon koko: " + maaliPinot[tokaX - 4].pinonKoko());
 
             if (maaliPinot[tokaX - 4].pinonKoko() > 0) {
                 kortti2 = maaliPinot[tokaX - 4].naytaPaalimmainen();
             }
-            System.out.println("Pohjimmainen: " + kortti2);
 
             if (maaliPinot[tokaX - 4].pinonKoko() == 0) {
                 if (kortti1.getArvo() != 1) {
@@ -93,35 +91,6 @@ public class KortinSiirto {
     }
 
     /**
-     * Käännetään paljastuneesta nurinpäin olevasta pakasta sen päälle uusi
-     * kortti näkyviin.
-     *
-     * @param pakan paikka
-     */
-//    public static void kaannaKortti(int mista) {
-//
-//        Kortti kaannetty = null;
-//        if (mista == 0) {
-//
-//            kaannetty = nostaKorttiPakasta();
-//
-//        } else {
-//            maaliPino = pinotOikein[mista];
-//
-//            if (maaliPino.pinonKoko() == 0) {
-//
-//                lahtoPino = pinotNurin[mista];
-//                siirrettava = lahtoPino.naytaPaalimmainen();
-//                lahtoPino.nostaPaalimmainen();
-//
-//                maaliPino.lisaaKortti(siirrettava);
-//
-//                pinotOikein[mista] = maaliPino;
-//                pinotNurin[mista] = lahtoPino;
-//            }
-//        }
-//    }
-    /**
      * Käännetään pakasta kortti jos siellä niitä on, muuten käännetään jo
      * avatut uudeksi pakaksi, niin että päälimmäinen jää pohjalle.
      */
@@ -133,7 +102,6 @@ public class KortinSiirto {
         Kortti kaannetty = null;
 
         if (pakka.pinonKoko() == 0) {
-            System.out.println("sekoitetaan");
 
             ArrayList<Kortti> kortit = kaannetyt.getKortit();
             for (int i = 0; i < kortit.size(); i++) {
@@ -145,7 +113,7 @@ public class KortinSiirto {
             pakka.nostaPaalimmainen();
             kaannetyt.lisaaKortti(siirrettava);
             kaannetty = siirrettava;
-            System.out.println("käännetään " + kaannetty);
+
         }
         pinotNurin[0] = pakka;
         pinotOikein[0] = kaannetyt;
@@ -153,11 +121,13 @@ public class KortinSiirto {
     }
 
     /**
-     * Siiretään kortti toiseen pinoon jos se on laillista. Poistuu ehkä koska
-     * hoitaa saman asian kuin siirraPino(). Ehkä.
+     * kortinIndeksi tarjoaa apuvälineen kortit suhteellisen sijainnin
+     * määrittelyyn pinossa. Käytetään blockaamaan siirtoyritykset korteilta
+     * joillta ei ole siihn oikeutta, esimerkiksi pinon keskeltä.
      *
-     * @param mista pinosta
-     * @param mihin pinoon
+     * @param mista
+     * @param monesko
+     * @return palautetaan indeksi
      */
     public static int kortinIndeksi(int mista, int monesko) {
 
@@ -170,6 +140,16 @@ public class KortinSiirto {
         return indeksi;
     }
 
+    /**
+     * Siirretään korttia tai nippua kortteja. Jos kortin päällä on muita ne
+     * siirtyvät mukana. Käännetään myös nurinpäin olevasta pinosta uusi kortti
+     * tarvittaessa.
+     *
+     * @param mista mista x
+     * @param mihin mihin x
+     * @param monesko y
+     */
+
     public static void siirraKortti(int mista, int mihin, int monesko) {
 
         lahtoPino = pinotOikein[mista];
@@ -179,7 +159,6 @@ public class KortinSiirto {
         int pinonKoko = lahtoPino.pinonKoko();
 
         int indeksi = kortinIndeksi(mista, monesko);
-        System.out.println("Kortin indeksi: " + indeksi);
 
         for (int i = indeksi; i < pinonKoko; i++) {
             siirrettava = lahtoPino.getKortti(i);
@@ -205,6 +184,12 @@ public class KortinSiirto {
         pinotOikein[mihin] = maaliPino;
     }
 
+    /**
+     * Siirretään kortti ylös maalipinoon
+     * @param mista mista x
+     * @param monesko y
+     * @param mihin  mihin x
+     */
     public static void siirraKorttiMaalipinoon(int mista, int monesko, int mihin) {
 
         int indeksi = kortinIndeksi(mista, monesko);
@@ -238,6 +223,10 @@ public class KortinSiirto {
         }
     }
 
+    /**
+     * Siirretään pakasta käännetty kortti maalipinoon.
+     * @param mihin mihin siirretään
+     */
     public static void siirraKorttiPakastaMaalipinoon(int mihin) {
 
         Korttipino pino = Pelilauta.getOikeinPino(0);
@@ -251,12 +240,21 @@ public class KortinSiirto {
         Pelilauta.maaliPinot[mihin - 4] = pino;
     }
 
+    /**
+     * Siirretään annettu kortti.
+     * @param kortti kortti
+     * @param mihin mihin siirretään
+     */
     public static void lisaaKorttiPinoon(Kortti kortti, int mihin) {
         Korttipino pino = pinotOikein[mihin];
         pino.lisaaKortti(kortti);
         pinotOikein[mihin] = pino;
     }
 
+    /**
+     * Siirretään korttipinosta käännetty kortti pelipinoon.
+     * @param mihin mihin siirretään
+     */
     public static void siirraKorttiPakastaLaudalle(int mihin) {
         Korttipino pino = Pelilauta.getOikeinPino(0);
         Kortti kortti = pino.naytaPaalimmainen();
@@ -269,8 +267,8 @@ public class KortinSiirto {
      * Tarkistetaan onko siirto laillinen eli siirrettävä yhden numeron pienempi
      * ja eri väriä.
      *
-     * @param siirrettavaKortti
-     * @param verrattavaKortti
+     * @param siirrettavaKortti kortti joka siirretään
+     * @param verrattavaKortti mihinkä verrataan
      * @return boolean
      */
     public static boolean onkoLaillinenSiirto(Kortti siirrettavaKortti, Kortti verrattavaKortti) {
@@ -288,8 +286,8 @@ public class KortinSiirto {
      * Käytetään jos koitetaan siirtää korttia maalipinoon, eli onko yhden
      * isompi ja samaa maata.
      *
-     * @param siirrettavaKortti
-     * @param verrattavaKortti
+     * @param siirrettavaKortti kortti joka siirretään
+     * @param verrattavaKortti  mihinkä verrataan
      * @return boolean
      */
     public static boolean getTyhja() {
@@ -312,34 +310,4 @@ public class KortinSiirto {
     }
 
 }
-//    public static void siirraKortti(int mista, int mihin, int mistaKorkeus, int mihinKorkeus) {
-//
-//        lahtoPino = pinotOikein[mista];
-//        Korttipino nurin = pinotNurin[mista];
-//
-//        int halkaisu = (mistaKorkeus - (nurin.pinonKoko() * 20) - 1) / 20;
-//        System.out.println("Halkaisu: " + halkaisu + " pinon koko: " + lahtoPino.pinonKoko());
-//
-//        for (int i = halkaisu - 1; i < lahtoPino.pinonKoko(); i++) {
-//            siirrettava = lahtoPino.getKortti(i);
-//            maaliPino = pinotOikein[mihin];
-//
-//            maaliPino.lisaaKortti(siirrettava);
-//        }
-//        lahtoPino.poista(halkaisu - 1, lahtoPino.pinonKoko());
-//
-//        if (lahtoPino.pinonKoko() < 1) {
-//
-//            if (nurin.pinonKoko() > 0) {
-//                Kortti kaannetty = nurin.naytaPaalimmainen();
-//                nurin.nostaPaalimmainen();
-//                pinotNurin[mista] = nurin;
-//                lahtoPino.lisaaKortti(kaannetty);
-//
-//            }
-//
-//        }
-//
-//        pinotOikein[mista] = lahtoPino;
-//        pinotOikein[mihin] = maaliPino;
-//    }
+

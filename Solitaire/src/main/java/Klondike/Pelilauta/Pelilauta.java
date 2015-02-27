@@ -4,7 +4,7 @@ import Klondike.Pelilogiikka.KortinSiirto;
 import java.util.*;
 
 /**
- * Pelilauta pitää muistissa korttipinojen paikat ja siirrot.
+ * Pelilauta pitää muistissa korttipinojen paikat.
  *
  * @author Zonsu
  */

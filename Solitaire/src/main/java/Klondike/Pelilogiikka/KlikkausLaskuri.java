@@ -39,7 +39,7 @@ public class KlikkausLaskuri {
                 laskuri = 0;
             } else {
                 laskuri = 0;
-
+                //Kysytään pelilogiikalta lupaa siirtää.
                 if (KortinSiirto.saakoSiirtaa(x, y, korttiX, korttiY)) {
                     System.out.println("Eka kortti: " + x + " " + y);
                     System.out.println("Toka kortti: " + korttiX + " " + korttiY);

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Klondike.GraafinenUi;
 
 import static Klondike.GraafinenUi.KorttienKuvat.*;
@@ -36,13 +32,13 @@ public class KorttienKuvatTest {
 
     }
 
-//    @Test
-//    public void liittaKuvanKorttiin() {
-//        liitaKuvaKorttiin(kortti);
-//
-//        BufferedImage kuva = null;
-//
-//        assertEquals(kuva, kortti.getKuva());
-//    }
+    @Test
+    public void liittaKuvanKorttiin() {
+        liitaKuvaKorttiin(kortti);
+
+        BufferedImage kuva = null;
+
+        assertEquals(kuva, kortti.getKuva());
+    }
 
 }

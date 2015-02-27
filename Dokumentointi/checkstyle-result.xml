@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.7">
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\GraafinenUi\Kayttoliittyma.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.GraafinenUi&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\GraafinenUi\KortinKuuntelija.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.GraafinenUi&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\GraafinenUi\KorttienKuvat.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.GraafinenUi&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\GraafinenUi\KorttipakanKuuntelija.java">
+<error line="6" column="9" severity="error" message="Name &apos;Klondike.GraafinenUi&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\GraafinenUi\Main.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.GraafinenUi&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\GraafinenUi\PelilaudanPiirtaja.java">
+<error line="1" severity="error" message="File length is 308 lines (max allowed is 200)." source="com.puppycrawl.tools.checkstyle.checks.sizes.FileLengthCheck"/>
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.GraafinenUi&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\Pelilauta\Kortti.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.Pelilauta&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\Pelilauta\KorttienJako.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.Pelilauta&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\Pelilauta\Korttipino.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.Pelilauta&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\Pelilauta\Pelilauta.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.Pelilauta&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\Pelilogiikka\KlikkausLaskuri.java">
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.Pelilogiikka&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\Johanna\Documents\GitHub\Solitaire\Solitaire\src\main\java\Klondike\Pelilogiikka\KortinSiirto.java">
+<error line="1" severity="error" message="File length is 313 lines (max allowed is 200)." source="com.puppycrawl.tools.checkstyle.checks.sizes.FileLengthCheck"/>
+<error line="1" column="9" severity="error" message="Name &apos;Klondike.Pelilogiikka&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+<error line="41" column="9" severity="error" message="&apos;}&apos; should be on the same line." source="com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyCheck"/>
+<error line="43" severity="error" message="else at indentation level 12 not at correct indentation, 8" source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+</file>
+</checkstyle>

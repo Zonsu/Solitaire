@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Luokka kuuntelee pelin korttipakan klikkauksia ja kääntää esiin kortteja.
  *
  * @author joqpaavo
  */
@@ -23,12 +24,15 @@ public class KorttipakanKuuntelija implements ActionListener {
 
     public KorttipakanKuuntelija() {
     }
+    /*
+     Klikkauksesta muokataan ensin korttipakkaa pelilogiikan puolella ja tämän jälkeen päivitetään näyttö vastaamaan tilannetta.
+     */
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         KortinSiirto.nostaKorttiPakasta();
-        PelilaudanPiirtaja.piirraUudestaan(2,20,2,20);
+        PelilaudanPiirtaja.piirraUudestaan(2, 20, 2, 20);
 
     }
 
