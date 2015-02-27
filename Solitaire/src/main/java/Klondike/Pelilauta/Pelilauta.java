@@ -35,7 +35,7 @@ public class Pelilauta {
     }
 
     public static Korttipino getOikeinPino(int i) {
-        return pinotNurin[i];
+        return pinotOikein[i];
     }
 
     public static Korttipino getMaaliPino(int i) {

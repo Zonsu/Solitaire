@@ -2,6 +2,7 @@ package Klondike.Pelilogiikka;
 
 import Klondike.Pelilauta.Kortti;
 import Klondike.Pelilauta.Korttipino;
+import Klondike.Pelilauta.Pelilauta;
 import static Klondike.Pelilauta.Pelilauta.maaliPinot;
 import static Klondike.Pelilauta.Pelilauta.pinotNurin;
 import static Klondike.Pelilauta.Pelilauta.pinotOikein;
@@ -18,6 +19,8 @@ public class KortinSiirto {
     private static Korttipino maaliPino;
     private static Kortti siirrettava;
     private static Kortti verrattava;
+    
+    private static boolean tyhja;
 
     /**
      *
@@ -27,9 +30,15 @@ public class KortinSiirto {
      * @param tokaY
      */
     public static boolean saakoSiirtaa(int ekaX, int ekaY, int tokaX, int tokaY) {
+
+        if (ekaY == 20 && ekaX > 2) {
+            return false;
+        } else if (tokaY == 20 && tokaX < 3) {
+            return false;
+        }
         return true;
     }
-    
+
     /**
      * Käännetään paljastuneesta nurinpäin olevasta pakasta sen päälle uusi
      * kortti näkyviin.
@@ -42,7 +51,6 @@ public class KortinSiirto {
         if (mista == 0) {
 
             kaannetty = nostaKorttiPakasta();
-            
 
         } else {
             maaliPino = pinotOikein[mista];
@@ -59,7 +67,7 @@ public class KortinSiirto {
                 pinotNurin[mista] = lahtoPino;
             }
         }
-        
+
         return kaannetty;
     }
 
@@ -72,8 +80,6 @@ public class KortinSiirto {
      * @param mihin pinoon
      */
     public static void siirraPino(int mista, int monesko, int mihin) {
-        
-        
 
     }
 
@@ -82,10 +88,10 @@ public class KortinSiirto {
      * avatut uudeksi pakaksi, niin että päälimmäinen jää pohjalle.
      */
     public static Kortti nostaKorttiPakasta() {
-        
+
         Korttipino pakka = pinotNurin[0];
         Korttipino kaannetyt = pinotOikein[0];
-        
+
         Kortti kaannetty = null;
 
         if (pakka.pinonKoko() == 0) {
@@ -104,7 +110,7 @@ public class KortinSiirto {
         }
         pinotNurin[0] = pakka;
         pinotOikein[0] = kaannetyt;
-        
+
         return kaannetty;
 
     }
@@ -119,24 +125,52 @@ public class KortinSiirto {
     public static void siirraKortti(int mista, int mihin) {
 
         lahtoPino = pinotOikein[mista];
-        System.out.println("Lähtöpinon koko: " + lahtoPino.pinonKoko());
-        siirrettava = lahtoPino.naytaPaalimmainen();
-        System.out.println("Ekan päälimmäinen: " + lahtoPino.naytaPaalimmainen());
+        siirrettava = lahtoPino.naytaPaalimmainen();;
 
         maaliPino = pinotOikein[mihin];
         verrattava = maaliPino.naytaPaalimmainen();
-        System.out.println("Tokan päälimmäinen: " + maaliPino.naytaPaalimmainen());
 
         if (maaliPino.pinonKoko() > 0 && onkoLaillinenSiirto(siirrettava, verrattava)) {
-            
+
             maaliPino.lisaaKortti(siirrettava);
             lahtoPino.nostaPaalimmainen();
-            
+
             pinotOikein[mista] = lahtoPino;
             pinotOikein[mihin] = maaliPino;
         }
 
     }
+    
+    
+    public static Kortti siirraKorttiMaalipinoon(int mista, int mihin) {
+        
+        Korttipino oikeinPino = Pelilauta.getOikeinPino(mista);
+        Kortti kortti = oikeinPino.naytaPaalimmainen();
+        oikeinPino.nostaPaalimmainen();
+
+        Korttipino maalipino = Pelilauta.getMaaliPino(mihin-4);
+        maalipino.lisaaKortti(kortti);
+        maaliPinot[mihin-4] = maalipino;
+        pinotOikein[mista] = oikeinPino;
+        
+        if (pinotOikein[mista].pinonKoko() == 0) {
+            if (pinotNurin[mista].pinonKoko() > 0) {
+                
+                setTyhja(true);
+                
+                Korttipino nurinPino = Pelilauta.getNurinPino(mista);
+                Kortti kortti2 = nurinPino.naytaPaalimmainen();
+                nurinPino.nostaPaalimmainen();
+                
+                oikeinPino.lisaaKortti(kortti2);
+                pinotOikein[mista] = oikeinPino;
+                pinotNurin[mista] = nurinPino;
+            }
+        }
+        
+        return kortti;
+    }
+    
 
     /**
      * Tarkistetaan onko siirto laillinen eli siirrettävä yhden numeron pienempi
@@ -152,8 +186,9 @@ public class KortinSiirto {
 
         if (verrattava.getArvo() - siirrettava.getArvo() == 1 && !verrattava.getVari().equals(siirrettava.getVari())) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -164,14 +199,22 @@ public class KortinSiirto {
      * @param verrattavaKortti
      * @return boolean
      */
+    public static boolean getTyhja() {
+        return tyhja;
+    }
+    public static void setTyhja(boolean arvo) {
+        tyhja = arvo;
+    }
+    
     public static boolean onkoLaillinenSiirtoMaalipinoon(Kortti siirrettavaKortti, Kortti verrattavaKortti) {
         siirrettava = siirrettavaKortti;
         verrattava = verrattavaKortti;
 
         if (siirrettava.getArvo() - verrattava.getArvo() == 1 && verrattava.getMaa().equals(siirrettava.getMaa())) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
 }

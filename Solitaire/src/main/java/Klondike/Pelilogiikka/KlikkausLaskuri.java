@@ -1,6 +1,7 @@
 package Klondike.Pelilogiikka;
 
 import Klondike.GraafinenUi.PelilaudanPiirtaja;
+import Klondike.Pelilauta.Kortti;
 import javax.swing.JButton;
 
 /**
@@ -29,7 +30,7 @@ public class KlikkausLaskuri {
             x = korttiX;
             y = korttiY;
             muistiKortti = kortti;
-            
+
             laskuri++;
 
         } else if (laskuri == 1) {
@@ -40,14 +41,20 @@ public class KlikkausLaskuri {
                 if (KortinSiirto.saakoSiirtaa(x, y, korttiX, korttiY)) {
                     System.out.println("Eka kortti: " + x + " " + y);
                     System.out.println("Toka kortti: " + korttiX + " " + korttiY);
-                    
-//                    KortinSiirto.siirraKortti(x, korttiX);
-                    
+
+                    if (korttiY == 20 && y > 20) {
+
+                        Kortti kort = KortinSiirto.siirraKorttiMaalipinoon(x, korttiX);
+                        PelilaudanPiirtaja.piirraMaalipinoon(korttiX, kort);
+                        PelilaudanPiirtaja.poistaPinosta(x, y);
+                        
+                    } else {
+                        KortinSiirto.siirraKortti(x, korttiX);
+                    }
+
 //                    Kortti kortti1 = 
 //                    
 //                    PelilaudanPiirtaja.siirraKortti(x, muistiKortti, korttiX, kortti);
-                    
-                    
                     laskuri = 0;
 
                 } else {

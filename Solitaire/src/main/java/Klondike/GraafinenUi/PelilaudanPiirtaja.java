@@ -5,6 +5,7 @@ import Klondike.GraafinenUi.KorttienKuvat;
 import Klondike.Pelilauta.Kortti;
 import Klondike.Pelilauta.Korttipino;
 import Klondike.Pelilauta.Pelilauta;
+import Klondike.Pelilogiikka.KortinSiirto;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -186,11 +187,10 @@ public class PelilaudanPiirtaja {
             for (int i = 0; i < oikein; i++) {
                 JButton kortti;
 
-                kortti = piirraOikein(paneeli, nurin + oikein - i, nurin+1);
+                kortti = piirraOikein(paneeli, nurin + oikein - i, nurin + 1);
                 paneeli.add(kortti);
                 KortinKuuntelija kuuntelija = new KortinKuuntelija(kortti);
                 kortti.addActionListener(kuuntelija);
-
 
             }
 
@@ -236,14 +236,14 @@ public class PelilaudanPiirtaja {
      * @param monesko
      * @return
      */
-    public JButton piirraOikein(JPanel paneeli, int monesko, int i) {
+    public static JButton piirraOikein(JPanel paneeli, int monesko, int i) {
 
         ImageIcon img;
         BufferedImage bufImg = null;
         JButton kuva;
         Insets insets;
         Dimension size;
-        
+
         Kortti kortti = Pelilauta.getOikeinPaalimmainen(i);
 
         bufImg = kortti.getKuva();
@@ -290,6 +290,83 @@ public class PelilaudanPiirtaja {
         kuva.addActionListener(kuuntelija);
 
         return kuva;
+    }
+
+    public static void piirraMaalipinoon(int pino, Kortti kortti) {
+        JPanel korttiPaneeli = null;
+        ImageIcon img;
+        JButton kuva;
+        Insets insets;
+        Dimension size;
+        BufferedImage bufImg = null;
+
+        if (pino == 4) {
+            korttiPaneeli = maaliPino1;
+        } else if (pino == 5) {
+            korttiPaneeli = maaliPino2;
+        } else if (pino == 6) {
+            korttiPaneeli = maaliPino3;
+        } else if (pino == 7) {
+            korttiPaneeli = maaliPino4;
+        }
+
+        korttiPaneeli.removeAll();
+        System.out.println("Piirretään " + kortti);
+        bufImg = kortti.getKuva();
+        img = new ImageIcon(bufImg);
+
+        kuva = new JButton(img);
+
+        insets = korttiPaneeli.getInsets();
+
+        kuva.setPreferredSize(new Dimension(72, 100));
+        size = kuva.getPreferredSize();
+
+        kuva.setBounds(20 + insets.left, 20 + insets.top,
+                size.width, size.height);
+
+        korttiPaneeli.add(kuva);
+        KortinKuuntelija kuuntelija = new KortinKuuntelija(kuva);
+        kuva.addActionListener(kuuntelija);
+
+        korttiPaneeli.repaint();
+    }
+
+    public static void poistaPinosta(int pino, int monesko) {
+        JPanel korttiPaneeli = null;
+
+        if (pino == 1) {
+            korttiPaneeli = pino1;
+
+        } else if (pino == 2) {
+            korttiPaneeli = pino2;
+        } else if (pino == 3) {
+            korttiPaneeli = pino3;
+        } else if (pino == 4) {
+            korttiPaneeli = pino4;
+        } else if (pino == 5) {
+            korttiPaneeli = pino5;
+        } else if (pino == 6) {
+            korttiPaneeli = pino6;
+        } else if (pino == 7) {
+            korttiPaneeli = pino7;
+        }
+        korttiPaneeli.remove(0);
+        System.out.println("Eka remmovue " + korttiPaneeli.getComponentCount());
+
+        if (KortinSiirto.getTyhja()) {
+            korttiPaneeli.remove(0);
+            System.out.println("Toka remove " + korttiPaneeli.getComponentCount());
+            JButton kuva = piirraOikein(korttiPaneeli, (monesko - 21) / 20, pino);
+            korttiPaneeli.add(kuva, 0);
+            System.out.println("Lisätään yksi " + korttiPaneeli.getComponentCount());
+            KortinKuuntelija kuuntelija = new KortinKuuntelija(kuva);
+            kuva.addActionListener(kuuntelija);
+
+            KortinSiirto.setTyhja(false);
+        }
+
+        korttiPaneeli.repaint();
     }
 
     public static void piirraKaannetty(Kortti kortti) {
@@ -368,19 +445,6 @@ public class PelilaudanPiirtaja {
                 size.width, size.height);
 
         return kuva;
-    }
-
-    public static void siirraKortti(int mista, JButton mika, int mihin, JButton mika2) {
-
-        JPanel pino = new JPanel();
-        pino = pinot[mista / 20 - 1];
-        pino.remove(mika);
-
-        pino = pinot[mihin / 20 - 1];
-        int montako = pino.getComponentCount();
-        pino.add(mika);
-
-        Kayttoliittyma.frame.pack();
     }
 
     /**

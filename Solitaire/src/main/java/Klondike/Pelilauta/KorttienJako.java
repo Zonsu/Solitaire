@@ -38,8 +38,8 @@ public class KorttienJako {
     public static void jaaUudestaan() {
 
         // Seitsemän pelipinoa ja pakka. Pinot erikseen korteille kuvapuoli alas- ja ylöspäin.
-        pinotNurin = new Korttipino[8];
-        pinotOikein = new Korttipino[13];
+//        pinotNurin = new Korttipino[8];
+//        pinotOikein = new Korttipino[13];
         // Maalipinot erikseen.
         maaliPinot = new Korttipino[4];
 
