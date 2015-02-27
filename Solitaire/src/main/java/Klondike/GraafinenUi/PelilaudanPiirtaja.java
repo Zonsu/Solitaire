@@ -333,33 +333,15 @@ public class PelilaudanPiirtaja {
     }
 
     public static void poistaPinosta(int pino, int monesko) {
-        JPanel korttiPaneeli = null;
-
-        if (pino == 1) {
-            korttiPaneeli = pino1;
-
-        } else if (pino == 2) {
-            korttiPaneeli = pino2;
-        } else if (pino == 3) {
-            korttiPaneeli = pino3;
-        } else if (pino == 4) {
-            korttiPaneeli = pino4;
-        } else if (pino == 5) {
-            korttiPaneeli = pino5;
-        } else if (pino == 6) {
-            korttiPaneeli = pino6;
-        } else if (pino == 7) {
-            korttiPaneeli = pino7;
-        }
+        JPanel korttiPaneeli = getPaneeli(pino);
+        korttiPaneeli = getPaneeli(pino);
         korttiPaneeli.remove(0);
-        System.out.println("Eka remmovue " + korttiPaneeli.getComponentCount());
 
         if (KortinSiirto.getTyhja()) {
             korttiPaneeli.remove(0);
-            System.out.println("Toka remove " + korttiPaneeli.getComponentCount());
+            System.out.println("Paneelin koko: " + korttiPaneeli.getComponentCount() + " monesko: " + monesko);
             JButton kuva = piirraOikein(korttiPaneeli, (monesko - 21) / 20, pino);
             korttiPaneeli.add(kuva, 0);
-            System.out.println("Lisätään yksi " + korttiPaneeli.getComponentCount());
             KortinKuuntelija kuuntelija = new KortinKuuntelija(kuva);
             kuva.addActionListener(kuuntelija);
 
@@ -367,6 +349,19 @@ public class PelilaudanPiirtaja {
         }
 
         korttiPaneeli.repaint();
+    }
+
+    public static void poistaKaannetyista(Kortti kort) {
+        tyhjaPakka.remove(tyhjaPakka.getComponentCount() - 1);
+
+        if (Pelilauta.getOikeinPino(0).pinonKoko() > 0) {
+            Kortti kortti = Pelilauta.getOikeinPaalimmainen(0);
+            piirraKaannetty(kortti);
+        } else {
+            JButton kor = piirraTyhja(tyhjaPakka);
+            tyhjaPakka.add(kor);
+        }
+        tyhjaPakka.repaint();
     }
 
     public static void piirraKaannetty(Kortti kortti) {
@@ -409,6 +404,56 @@ public class PelilaudanPiirtaja {
 
     }
 
+    public static void piirraKortinSiirto(int mista, int mihin, int mistaKorkeus, int mihinKorkeus) {
+
+        if (Pelilauta.getOikeinPino(mista).pinonKoko() <= 1) {
+            KortinSiirto.setTyhja(true);
+        }
+
+        poistaPinosta(mista, mistaKorkeus);
+        JPanel korttiPaneeli = getPaneeli(mihin);
+        JButton kort = piirraOikein(korttiPaneeli, (mihinKorkeus + 19) / 20, mihin);
+        korttiPaneeli.add(kort, 0);
+        KortinKuuntelija kuuntelija = new KortinKuuntelija(kort);
+        kort.addActionListener(kuuntelija);
+        korttiPaneeli.repaint();
+    }
+
+    public static void siirraKorttiPakastaLaudalle(Kortti kortti, int mihin, int mihinKorkeus) {
+        Kortti kort = kortti;
+        poistaKaannetyista(kort);
+
+        JPanel korttiPaneeli = getPaneeli(mihin);
+
+        JButton kuva = piirraOikein(korttiPaneeli, (mihinKorkeus+19)/20, mihin);
+        korttiPaneeli.add(kuva, 0);
+        KortinKuuntelija kuuntelija = new KortinKuuntelija(kuva);
+        kuva.addActionListener(kuuntelija);
+
+        korttiPaneeli.repaint();
+    }
+
+    public static JPanel getPaneeli(int pino) {
+        JPanel korttiPaneeli = null;
+
+        if (pino == 1) {
+            korttiPaneeli = pino1;
+
+        } else if (pino == 2) {
+            korttiPaneeli = pino2;
+        } else if (pino == 3) {
+            korttiPaneeli = pino3;
+        } else if (pino == 4) {
+            korttiPaneeli = pino4;
+        } else if (pino == 5) {
+            korttiPaneeli = pino5;
+        } else if (pino == 6) {
+            korttiPaneeli = pino6;
+        } else if (pino == 7) {
+            korttiPaneeli = pino7;
+        }
+        return korttiPaneeli;
+    }
 //    public JButton piirraPiilotettu(JPanel paneeli, int monesko) {
 //
 //        JButton kuva = null;
@@ -426,6 +471,7 @@ public class PelilaudanPiirtaja {
 //
 //        return kuva;
 //    }
+
     public JButton piirraPakka(JPanel paneeli) {
 
         ImageIcon img;
@@ -447,84 +493,4 @@ public class PelilaudanPiirtaja {
         return kuva;
     }
 
-    /**
-     * Haetaan annetusta spritestä kaikki 52 korttia ja taulukoidaan ne maiden
-     * mukaan. Haetaan myös kortin taustakuva ja tyhjää paikkaa kuvaava kuva.
-     *
-     * @throws IOException
-     */
 }
-
-//        for (int i = 0; i < 1; i++) {
-//            BufferedImage img = sprites[i];
-//            JLabel kuva = new JLabel(new ImageIcon(img));
-//
-//            paneeli.add(kuva);
-//
-//            Insets insets = paneeli.getInsets();
-//            Dimension size = kuva.getPreferredSize();
-//            kuva.setBounds(25 + insets.left, 5 + insets.top,
-//                    size.width, size.height);
-//
-//        }
-//        JPanel paneeli = new JPanel();
-//
-//        OverlayLayout overlay = new OverlayLayout(paneeli);
-//        paneeli.setLayout(overlay);
-//        paneeli.setBackground(Color.green);
-//
-//        JLabel kuva = new JLabel(tausta);
-//        paneeli.add(kuva);
-//
-//        container.add(paneeli, BorderLayout.NORTH);
-//
-//        paneeli = new JPanel();
-//
-//        overlay = new OverlayLayout(paneeli);
-//        paneeli.setLayout(overlay);
-//        paneeli.setBackground(Color.green);
-//
-//        kuva = new JLabel(tyhja);
-//        paneeli.add(kuva);
-//
-//        container.add(paneeli, BorderLayout.NORTH);
-//
-//        paneeli = new JPanel();
-//
-//        overlay = new OverlayLayout(paneeli);
-//        paneeli.setLayout(overlay);
-//        paneeli.setBackground(Color.green);
-//
-//        container.add(paneeli, BorderLayout.NORTH);
-//
-//        for (int i = 0; i < 4; i++) {
-//            paneeli = new JPanel();
-//
-//            overlay = new OverlayLayout(paneeli);
-//            paneeli.setLayout(overlay);
-//            paneeli.setBackground(Color.green);
-//
-//            kuva = new JLabel(tyhja);
-//            paneeli.add(kuva);
-//
-//            container.add(paneeli, BorderLayout.NORTH);
-//        }
-//
-//        for (int i = 0; i < 7; i++) {
-//
-//            paneeli = new JPanel();
-//            overlay = new OverlayLayout(paneeli);
-//
-//            paneeli.setLayout(overlay);
-//            paneeli.setBackground(Color.green);
-//
-//            //BufferedImage img = sprites[2];
-//            BufferedImage kortti2 = sprites[5];
-//            JLabel kuva2 = new JLabel(new ImageIcon(kortti2));
-//            paneeli.add(kuva2);
-//
-//            kuva = new JLabel(tausta);
-//            paneeli.add(kuva);
-//
-//            container.add(paneeli, BorderLayout.NORTH);
-//        }

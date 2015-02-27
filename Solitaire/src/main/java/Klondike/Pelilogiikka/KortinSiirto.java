@@ -19,7 +19,7 @@ public class KortinSiirto {
     private static Korttipino maaliPino;
     private static Kortti siirrettava;
     private static Kortti verrattava;
-    
+
     private static boolean tyhja;
 
     /**
@@ -122,55 +122,93 @@ public class KortinSiirto {
      * @param mista pinosta
      * @param mihin pinoon
      */
-    public static void siirraKortti(int mista, int mihin) {
+    public static void siirraKortti(int mista, int mihin, int mistaKorkeus, int mihinKorkeus) {
+
 
         lahtoPino = pinotOikein[mista];
-        siirrettava = lahtoPino.naytaPaalimmainen();;
+        Korttipino nurin = pinotNurin[mista];
+        
+        int halkaisu = mistaKorkeus/20;
+        
+        if ((halkaisu) < lahtoPino.pinonKoko()) {
+            
+        }
+        
+        siirrettava = lahtoPino.naytaPaalimmainen();
 
         maaliPino = pinotOikein[mihin];
         verrattava = maaliPino.naytaPaalimmainen();
 
-        if (maaliPino.pinonKoko() > 0 && onkoLaillinenSiirto(siirrettava, verrattava)) {
+        maaliPino.lisaaKortti(siirrettava);
+        lahtoPino.nostaPaalimmainen();
 
-            maaliPino.lisaaKortti(siirrettava);
-            lahtoPino.nostaPaalimmainen();
+      
+        Kortti kaannetty = nurin.naytaPaalimmainen();
+        nurin.nostaPaalimmainen();
+        pinotNurin[mista] = nurin;
 
-            pinotOikein[mista] = lahtoPino;
-            pinotOikein[mihin] = maaliPino;
-        }
+        lahtoPino.lisaaKortti(kaannetty);
+
+        pinotOikein[mista] = lahtoPino;
+        pinotOikein[mihin] = maaliPino;
 
     }
-    
-    
+
     public static Kortti siirraKorttiMaalipinoon(int mista, int mihin) {
-        
+
         Korttipino oikeinPino = Pelilauta.getOikeinPino(mista);
         Kortti kortti = oikeinPino.naytaPaalimmainen();
         oikeinPino.nostaPaalimmainen();
 
-        Korttipino maalipino = Pelilauta.getMaaliPino(mihin-4);
+        Korttipino maalipino = Pelilauta.getMaaliPino(mihin - 4);
         maalipino.lisaaKortti(kortti);
-        maaliPinot[mihin-4] = maalipino;
+        maaliPinot[mihin - 4] = maalipino;
         pinotOikein[mista] = oikeinPino;
-        
+
         if (pinotOikein[mista].pinonKoko() == 0) {
             if (pinotNurin[mista].pinonKoko() > 0) {
-                
+
                 setTyhja(true);
-                
+
                 Korttipino nurinPino = Pelilauta.getNurinPino(mista);
                 Kortti kortti2 = nurinPino.naytaPaalimmainen();
                 nurinPino.nostaPaalimmainen();
-                
+
                 oikeinPino.lisaaKortti(kortti2);
                 pinotOikein[mista] = oikeinPino;
                 pinotNurin[mista] = nurinPino;
             }
         }
-        
+
         return kortti;
     }
-    
+
+    public static Kortti siirraKorttiPakastaMaalipinoon(int mihin) {
+
+        Korttipino pino = Pelilauta.getOikeinPino(0);
+        Kortti kortti = pino.naytaPaalimmainen();
+        pino.nostaPaalimmainen();
+
+        pinotOikein[0] = pino;
+
+        return kortti;
+
+    }
+
+    public static void lisaaKorttiPinoon(Kortti kortti, int mihin) {
+        Korttipino pino = pinotOikein[mihin];
+        pino.lisaaKortti(kortti);
+        pinotOikein[mihin] = pino;
+    }
+
+    public static Kortti siirraKorttiPakastaLaudalle(int mihin) {
+        Korttipino pino = Pelilauta.getOikeinPino(0);
+        Kortti kortti = pino.naytaPaalimmainen();
+        pino.nostaPaalimmainen();
+
+        lisaaKorttiPinoon(kortti, mihin);
+        return kortti;
+    }
 
     /**
      * Tarkistetaan onko siirto laillinen eli siirrettävä yhden numeron pienempi
@@ -202,10 +240,11 @@ public class KortinSiirto {
     public static boolean getTyhja() {
         return tyhja;
     }
+
     public static void setTyhja(boolean arvo) {
         tyhja = arvo;
     }
-    
+
     public static boolean onkoLaillinenSiirtoMaalipinoon(Kortti siirrettavaKortti, Kortti verrattavaKortti) {
         siirrettava = siirrettavaKortti;
         verrattava = verrattavaKortti;
