@@ -1,0 +1,8 @@
+**Testausdokumentaatio**
+
+Pelin testit ovat vähäisiä myöhäisessä vaiheessa tehdystä käyttöliittymän muutoksesta johtuen. Aiemmin graafisessa käyttöliittymässä liikuteltiin yhtä kuvaelementtia kerrallaan, mikä aiheutti suuria ongelmia käyttöliittymän ja pelilogiikan yhdistämisessä. Myös logiikan puolelle tuli muutoksia jotka hajottivat osan testeistä.
+
+Nykyistä käyttöliittymää ja pelilogiikka on testattu pelaamalla. Nykyisessä versiossa piirretään jokaisen päivityksen yhteydessä koko korttijono uusiksi, mikä mm. korttien liikuttelun isompina ryppäinä. Lisäksi bugeja on helpomi metsästää kun ohjelman piirtäminen toimii suht yhtenäisesti jokaisella kierroksella.
+
+Viime hetken tunnettuja bugeja:
+* 

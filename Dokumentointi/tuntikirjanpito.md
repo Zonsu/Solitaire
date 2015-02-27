@@ -1,6 +1,18 @@
 ﻿##Tuntikirjanpito
 ### Solitaire, ohjelmoinnin harjoitustyö
 
+**27.3.2015**
+
+Työmäärä: 14h
+
+Kohde: Demo, graafisen käyttöliittymän uudelleen toteutus, dokumentaatio
+
+**26.2.2015**
+
+Työmäärä: 12h
+
+Kohde: Graafinen käyttöliittymä, pelilogiikan yhdistely
+
 **20.2.2015**
 
 Työmäärä: 6h
