@@ -38,6 +38,8 @@ public class KlikkausLaskuri {
             if (x == korttiX && y == korttiY) {
                 laskuri = 0;
             } else {
+
+                
                 if (KortinSiirto.saakoSiirtaa(x, y, korttiX, korttiY)) {
                     System.out.println("Eka kortti: " + x + " " + y);
                     System.out.println("Toka kortti: " + korttiX + " " + korttiY);

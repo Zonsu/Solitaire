@@ -25,41 +25,28 @@ public class PelilaudanPiirtaja {
     public static ImageIcon tyhja;
     private int korttiLaskuri;
     private static JPanel[] pinot = new JPanel[10];
+    private static Color taustaVari = new Color(104, 185, 234, 45);
 
     static JPanel pakka = new JPanel();
-
     static JPanel tyhjaPakka = new JPanel();
-
     static JPanel laatikko = new JPanel();
-
     static JPanel maaliPino1 = new JPanel();
-
     static JPanel maaliPino2 = new JPanel();
-
     static JPanel maaliPino3 = new JPanel();
-
     static JPanel maaliPino4 = new JPanel();
-
     static JPanel pino1 = new JPanel();
-
     static JPanel pino2 = new JPanel();
-
     static JPanel pino3 = new JPanel();
-
     static JPanel pino4 = new JPanel();
-
     static JPanel pino5 = new JPanel();
-
     static JPanel pino6 = new JPanel();
-
     static JPanel pino7 = new JPanel();
 
     void luoKomponentit(Container container) {
 
-        /* 
-         Tästä tulee todennäköisesti myöhemmin GridBgLayout kunhan jaksan selvittää.
-         */
+
         container.setLayout(new GridLayout(2, 7, 0, 0));
+        
 
         try {
             KorttienKuvat.tuoKuvatSpritesta();
@@ -94,6 +81,7 @@ public class PelilaudanPiirtaja {
         pakka.add(korttipakka);
         KorttipakanKuuntelija kuuntelija = new KorttipakanKuuntelija();
         korttipakka.addActionListener(kuuntelija);
+        pakka.setBackground(Color.gray.brighter());
         container.add(pakka);
 
         tyhjaPakka.setLayout(null);
@@ -104,6 +92,7 @@ public class PelilaudanPiirtaja {
          Tehdään tyhjä paneeli esteettisistä syistä.
          */
         laatikko.setLayout(null);
+        laatikko.setBackground(Color.gray.brighter());
         container.add(laatikko);
 
         /*
@@ -178,6 +167,7 @@ public class PelilaudanPiirtaja {
     public void uusiPaneeli(int nurin, int oikein, JPanel paneeli) {
 
         paneeli.setLayout(null);
+        paneeli.setBackground(Color.gray.brighter());
 
         if (nurin == 0 && oikein == 0) {
             paneeli.add(piirraTyhja(paneeli));
@@ -193,6 +183,7 @@ public class PelilaudanPiirtaja {
                 kortti.addActionListener(kuuntelija);
 
             }
+            
 
             for (int i = 0; i < nurin; i++) {
                 paneeli.add(piirraNurin(paneeli, nurin - i));
@@ -291,6 +282,26 @@ public class PelilaudanPiirtaja {
 
         return kuva;
     }
+        public static JLabel piirraPohja(JPanel paneeli) {
+
+        ImageIcon img;
+        JLabel kuva;
+        Insets insets;
+        Dimension size;
+
+        img = tyhja;
+        kuva = new JLabel(img);
+
+        insets = paneeli.getInsets();
+
+        kuva.setPreferredSize(new Dimension(72, 100));
+        size = kuva.getPreferredSize();
+
+        kuva.setBounds(20 + insets.left, 20 + insets.top,
+                size.width, size.height);
+
+        return kuva;
+    }
 
     public static void piirraMaalipinoon(int pino, Kortti kortti) {
         JPanel korttiPaneeli = null;
@@ -348,6 +359,8 @@ public class PelilaudanPiirtaja {
             KortinSiirto.setTyhja(false);
         } else {
             KortinSiirto.setTyhja(false);
+            JLabel kuva = piirraPohja(korttiPaneeli);
+            korttiPaneeli.add(kuva, 0);
         }
 
         korttiPaneeli.repaint();
