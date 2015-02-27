@@ -27,9 +27,8 @@ public class KorttipakanKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        Kortti kortti = KortinSiirto.kaannaKortti(0);
-        System.out.println("Kuuntelijalle palautettiin: " + kortti);
-        PelilaudanPiirtaja.piirraKaannetty(kortti);
+        KortinSiirto.nostaKorttiPakasta();
+        PelilaudanPiirtaja.piirraUudestaan(2,20,2,20);
 
     }
 

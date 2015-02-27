@@ -38,37 +38,28 @@ public class KlikkausLaskuri {
             if (x == korttiX && y == korttiY) {
                 laskuri = 0;
             } else {
+                laskuri = 0;
 
-                
                 if (KortinSiirto.saakoSiirtaa(x, y, korttiX, korttiY)) {
                     System.out.println("Eka kortti: " + x + " " + y);
                     System.out.println("Toka kortti: " + korttiX + " " + korttiY);
 
-                    if (korttiY == 20 && y > 20) {
-
-                        Kortti kort = KortinSiirto.siirraKorttiMaalipinoon(x, korttiX);
-                        PelilaudanPiirtaja.piirraMaalipinoon(korttiX, kort);
-                        PelilaudanPiirtaja.poistaPinosta(x, y);
+                    if (korttiY == 20 && (y > 20 || y < 20)) {
+                        KortinSiirto.siirraKorttiMaalipinoon(x, y, korttiX);
 
                     } else if (korttiY == 20 && y == 20) {
-                        Kortti kort = KortinSiirto.siirraKorttiPakastaMaalipinoon(korttiX);
-                        PelilaudanPiirtaja.piirraMaalipinoon(korttiX, kort);
-                        PelilaudanPiirtaja.poistaKaannetyista(kort);
+                        KortinSiirto.siirraKorttiPakastaMaalipinoon(korttiX);
 
-                    } else if (y == 20 && korttiY > 20 && x < 3) {
-                        Kortti kort = KortinSiirto.siirraKorttiPakastaLaudalle(korttiX);
-                        PelilaudanPiirtaja.siirraKorttiPakastaLaudalle(kort, korttiX, korttiY);
-                        
+                    } else if (y == 20 && (korttiY > 20 || korttiY < 20) && x < 3) {
+                        KortinSiirto.siirraKorttiPakastaLaudalle(korttiX);
+
                     } else {
-                        
-                        KortinSiirto.siirraKortti(x, korttiX, y, korttiY);
-                        PelilaudanPiirtaja.piirraKortinSiirto(x, korttiX, y, korttiY);
+                        KortinSiirto.siirraKortti(x, korttiX, y);
 
                     }
+                    
+                    PelilaudanPiirtaja.piirraUudestaan(x, y, korttiX, korttiY);
 
-//                    Kortti kortti1 = 
-//                    
-//                    PelilaudanPiirtaja.siirraKortti(x, muistiKortti, korttiX, kortti);
                     laskuri = 0;
 
                 } else {
@@ -80,3 +71,5 @@ public class KlikkausLaskuri {
         System.out.println("");
     }
 }
+
+

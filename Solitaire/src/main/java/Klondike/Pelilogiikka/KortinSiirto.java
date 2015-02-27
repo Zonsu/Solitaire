@@ -48,9 +48,10 @@ public class KortinSiirto {
             lahtoPino = pinotOikein[0];
             kortti1 = lahtoPino.naytaPaalimmainen();
             System.out.println("Päälimmäinen: " + kortti1);
-        } else if (ekaY > 20) {
+        } else {
             lahtoPino = pinotOikein[ekaX];
-            kortti1 = lahtoPino.naytaPaalimmainen();
+//            kortti1 = lahtoPino.naytaPaalimmainen();
+            kortti1 = lahtoPino.getKortti(kortinIndeksi(ekaX, ekaY));
         }
 
         /*
@@ -74,10 +75,15 @@ public class KortinSiirto {
             }
 
         }
-        if (tokaY > 20) {
+        if (tokaY != 20) {
             Korttipino maalipino = pinotOikein[tokaX];
-            kortti2 = maalipino.naytaPaalimmainen();
-            if ((kortti2.getArvo() - kortti1.getArvo() != 1) || kortti2.getVari().equals(kortti1.getVari())) {
+            int koko = maalipino.pinonKoko();
+            if (maalipino.pinonKoko() != 0) {
+                kortti2 = maalipino.naytaPaalimmainen();
+                if ((kortti2.getArvo() - kortti1.getArvo() != 1) || kortti2.getVari().equals(kortti1.getVari())) {
+                    return false;
+                }
+            } else if (kortti1.getArvo() != 13) {
                 return false;
             }
         }
@@ -92,37 +98,34 @@ public class KortinSiirto {
      *
      * @param pakan paikka
      */
-    public static Kortti kaannaKortti(int mista) {
-
-        Kortti kaannetty = null;
-        if (mista == 0) {
-
-            kaannetty = nostaKorttiPakasta();
-
-        } else {
-            maaliPino = pinotOikein[mista];
-
-            if (maaliPino.pinonKoko() == 0) {
-
-                lahtoPino = pinotNurin[mista];
-                siirrettava = lahtoPino.naytaPaalimmainen();
-                lahtoPino.nostaPaalimmainen();
-
-                maaliPino.lisaaKortti(siirrettava);
-
-                pinotOikein[mista] = maaliPino;
-                pinotNurin[mista] = lahtoPino;
-            }
-        }
-
-        return kaannetty;
-    }
-
+//    public static void kaannaKortti(int mista) {
+//
+//        Kortti kaannetty = null;
+//        if (mista == 0) {
+//
+//            kaannetty = nostaKorttiPakasta();
+//
+//        } else {
+//            maaliPino = pinotOikein[mista];
+//
+//            if (maaliPino.pinonKoko() == 0) {
+//
+//                lahtoPino = pinotNurin[mista];
+//                siirrettava = lahtoPino.naytaPaalimmainen();
+//                lahtoPino.nostaPaalimmainen();
+//
+//                maaliPino.lisaaKortti(siirrettava);
+//
+//                pinotOikein[mista] = maaliPino;
+//                pinotNurin[mista] = lahtoPino;
+//            }
+//        }
+//    }
     /**
      * Käännetään pakasta kortti jos siellä niitä on, muuten käännetään jo
      * avatut uudeksi pakaksi, niin että päälimmäinen jää pohjalle.
      */
-    public static Kortti nostaKorttiPakasta() {
+    public static void nostaKorttiPakasta() {
 
         Korttipino pakka = pinotNurin[0];
         Korttipino kaannetyt = pinotOikein[0];
@@ -136,6 +139,7 @@ public class KortinSiirto {
             for (int i = 0; i < kortit.size(); i++) {
                 pakka.lisaaKortti(kortit.get(kortit.size() - i - 1));
             }
+            kaannetyt.tyhjennaPino();
         } else {
             siirrettava = pakka.naytaPaalimmainen();
             pakka.nostaPaalimmainen();
@@ -146,8 +150,6 @@ public class KortinSiirto {
         pinotNurin[0] = pakka;
         pinotOikein[0] = kaannetyt;
 
-        return kaannetty;
-
     }
 
     /**
@@ -157,16 +159,35 @@ public class KortinSiirto {
      * @param mista pinosta
      * @param mihin pinoon
      */
-    public static void siirraKortti(int mista, int mihin, int mistaKorkeus, int mihinKorkeus) {
+    public static int kortinIndeksi(int mista, int monesko) {
+
+        lahtoPino = pinotOikein[mista];
+        Korttipino nurin = pinotNurin[mista];
+
+        int pinonKoko = lahtoPino.pinonKoko();
+
+        int indeksi = (monesko - nurin.pinonKoko() * 20 - 1) / 20;
+        return indeksi;
+    }
+
+    public static void siirraKortti(int mista, int mihin, int monesko) {
 
         lahtoPino = pinotOikein[mista];
         maaliPino = pinotOikein[mihin];
         Korttipino nurin = pinotNurin[mista];
 
-        siirrettava = lahtoPino.naytaPaalimmainen();
-        maaliPino.lisaaKortti(siirrettava);
-        
-        lahtoPino.nostaPaalimmainen();
+        int pinonKoko = lahtoPino.pinonKoko();
+
+        int indeksi = kortinIndeksi(mista, monesko);
+        System.out.println("Kortin indeksi: " + indeksi);
+
+        for (int i = indeksi; i < pinonKoko; i++) {
+            siirrettava = lahtoPino.getKortti(i);
+            maaliPino.lisaaKortti(siirrettava);
+        }
+        for (int i = indeksi; i < pinonKoko; i++) {
+            lahtoPino.nostaPaalimmainen();
+        }
 
         if (lahtoPino.pinonKoko() < 1) {
 
@@ -184,36 +205,40 @@ public class KortinSiirto {
         pinotOikein[mihin] = maaliPino;
     }
 
-    public static Kortti siirraKorttiMaalipinoon(int mista, int mihin) {
+    public static void siirraKorttiMaalipinoon(int mista, int monesko, int mihin) {
+
+        int indeksi = kortinIndeksi(mista, monesko);
 
         Korttipino oikeinPino = Pelilauta.getOikeinPino(mista);
-        Kortti kortti = oikeinPino.naytaPaalimmainen();
-        oikeinPino.nostaPaalimmainen();
 
-        Korttipino maalipino = Pelilauta.getMaaliPino(mihin - 4);
-        maalipino.lisaaKortti(kortti);
-        maaliPinot[mihin - 4] = maalipino;
-        pinotOikein[mista] = oikeinPino;
+        if (indeksi + 1 == oikeinPino.pinonKoko()) {
 
-        if (pinotOikein[mista].pinonKoko() == 0) {
-            if (pinotNurin[mista].pinonKoko() > 0) {
+            Kortti kortti = oikeinPino.naytaPaalimmainen();
+            oikeinPino.nostaPaalimmainen();
 
-                setTyhja(true);
+            Korttipino maalipino = Pelilauta.getMaaliPino(mihin - 4);
+            maalipino.lisaaKortti(kortti);
+            maaliPinot[mihin - 4] = maalipino;
+            pinotOikein[mista] = oikeinPino;
 
-                Korttipino nurinPino = Pelilauta.getNurinPino(mista);
-                Kortti kortti2 = nurinPino.naytaPaalimmainen();
-                nurinPino.nostaPaalimmainen();
+            if (pinotOikein[mista].pinonKoko() == 0) {
+                if (pinotNurin[mista].pinonKoko() > 0) {
 
-                oikeinPino.lisaaKortti(kortti2);
-                pinotOikein[mista] = oikeinPino;
-                pinotNurin[mista] = nurinPino;
+                    setTyhja(true);
+
+                    Korttipino nurinPino = Pelilauta.getNurinPino(mista);
+                    Kortti kortti2 = nurinPino.naytaPaalimmainen();
+                    nurinPino.nostaPaalimmainen();
+
+                    oikeinPino.lisaaKortti(kortti2);
+                    pinotOikein[mista] = oikeinPino;
+                    pinotNurin[mista] = nurinPino;
+                }
             }
         }
-
-        return kortti;
     }
 
-    public static Kortti siirraKorttiPakastaMaalipinoon(int mihin) {
+    public static void siirraKorttiPakastaMaalipinoon(int mihin) {
 
         Korttipino pino = Pelilauta.getOikeinPino(0);
         Kortti kortti = pino.naytaPaalimmainen();
@@ -224,9 +249,6 @@ public class KortinSiirto {
         pino = Pelilauta.getMaaliPino(mihin - 4);
         pino.lisaaKortti(kortti);
         Pelilauta.maaliPinot[mihin - 4] = pino;
-
-        return kortti;
-
     }
 
     public static void lisaaKorttiPinoon(Kortti kortti, int mihin) {
@@ -235,13 +257,12 @@ public class KortinSiirto {
         pinotOikein[mihin] = pino;
     }
 
-    public static Kortti siirraKorttiPakastaLaudalle(int mihin) {
+    public static void siirraKorttiPakastaLaudalle(int mihin) {
         Korttipino pino = Pelilauta.getOikeinPino(0);
         Kortti kortti = pino.naytaPaalimmainen();
         pino.nostaPaalimmainen();
 
         lisaaKorttiPinoon(kortti, mihin);
-        return kortti;
     }
 
     /**
