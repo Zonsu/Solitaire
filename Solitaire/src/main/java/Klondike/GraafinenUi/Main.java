@@ -1,13 +1,8 @@
-package Klondike;
-
-import Klondike.GraafinenUi.Kayttoliittyma;
+package Klondike.GraafinenUi;
 import javax.swing.*;
+import java.util.*;
 
-/**
- * Vielä tyhjä main.
- *
- * @author Zonsu
- */
+
 public class Main {
 
     public static void main(String[] args) {
