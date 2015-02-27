@@ -337,7 +337,7 @@ public class PelilaudanPiirtaja {
         korttiPaneeli = getPaneeli(pino);
         korttiPaneeli.remove(0);
 
-        if (KortinSiirto.getTyhja()) {
+        if (KortinSiirto.getTyhja() && korttiPaneeli.getComponentCount() > 0) {
             korttiPaneeli.remove(0);
             System.out.println("Paneelin koko: " + korttiPaneeli.getComponentCount() + " monesko: " + monesko);
             JButton kuva = piirraOikein(korttiPaneeli, (monesko - 21) / 20, pino);
@@ -345,6 +345,8 @@ public class PelilaudanPiirtaja {
             KortinKuuntelija kuuntelija = new KortinKuuntelija(kuva);
             kuva.addActionListener(kuuntelija);
 
+            KortinSiirto.setTyhja(false);
+        } else {
             KortinSiirto.setTyhja(false);
         }
 

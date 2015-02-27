@@ -71,17 +71,6 @@ public class KortinSiirto {
         return kaannetty;
     }
 
-    /**
-     * Kesken. Siirretään näkyvillä olevasta pinosta toiseen näkyvillä olevaan
-     * pinoon. Mukana siirtyvät kaikki pinon päälimmäiset.
-     *
-     * @param mista pinosta
-     * @param monesko kortti pinossa siirretaan
-     * @param mihin pinoon
-     */
-    public static void siirraPino(int mista, int monesko, int mihin) {
-
-    }
 
     /**
      * Käännetään pakasta kortti jos siellä niitä on, muuten käännetään jo
@@ -124,34 +113,34 @@ public class KortinSiirto {
      */
     public static void siirraKortti(int mista, int mihin, int mistaKorkeus, int mihinKorkeus) {
 
-
         lahtoPino = pinotOikein[mista];
         Korttipino nurin = pinotNurin[mista];
-        
-        int halkaisu = mistaKorkeus/20;
-        
-        if ((halkaisu) < lahtoPino.pinonKoko()) {
-            
+
+        int halkaisu = (mistaKorkeus - (nurin.pinonKoko()*20) - 1) / 20;
+        System.out.println("Halkaisu: " + halkaisu + " pinon koko: " + lahtoPino.pinonKoko());
+
+        for (int i = halkaisu - 1; i < lahtoPino.pinonKoko(); i++) {
+            siirrettava = lahtoPino.getKortti(i);
+            maaliPino = pinotOikein[mihin];
+
+            maaliPino.lisaaKortti(siirrettava);
         }
-        
-        siirrettava = lahtoPino.naytaPaalimmainen();
+        lahtoPino.poista(halkaisu - 1, lahtoPino.pinonKoko());
 
-        maaliPino = pinotOikein[mihin];
-        verrattava = maaliPino.naytaPaalimmainen();
+        if (lahtoPino.pinonKoko() < 1) {
 
-        maaliPino.lisaaKortti(siirrettava);
-        lahtoPino.nostaPaalimmainen();
+            if (nurin.pinonKoko() > 0) {
+                Kortti kaannetty = nurin.naytaPaalimmainen();
+                nurin.nostaPaalimmainen();
+                pinotNurin[mista] = nurin;
+                lahtoPino.lisaaKortti(kaannetty);
 
-      
-        Kortti kaannetty = nurin.naytaPaalimmainen();
-        nurin.nostaPaalimmainen();
-        pinotNurin[mista] = nurin;
+            }
 
-        lahtoPino.lisaaKortti(kaannetty);
+        }
 
         pinotOikein[mista] = lahtoPino;
         pinotOikein[mihin] = maaliPino;
-
     }
 
     public static Kortti siirraKorttiMaalipinoon(int mista, int mihin) {

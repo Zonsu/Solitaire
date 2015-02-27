@@ -60,6 +60,19 @@ public class Korttipino {
     public int pinonKoko() {
         return this.kortit.size();
     }
+    public Kortti getKortti(int i) {
+        Kortti kortti = this.kortit.get(i);
+        return kortti;
+    }
+    
+    public void poista(int i, int koko) {
+
+        System.out.println("Poiston indeksi: " + i + " poistopinon koko: " + koko);
+        
+        for (int j = i; j < koko; j++) {
+            this.kortit.remove(j);
+        }
+    }
 
     @Override
     public boolean equals(Object obj) {
